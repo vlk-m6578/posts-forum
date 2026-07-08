@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: -0.05em;
+
+  padding: 10px 25px;
+}
+
+.name {}
+
+.links {
+  display: flex;
+  gap: 12px;
+}
+
+.active {
+  color: #75778B;
+}
+
+.exit {
+  display: flex;
+  gap: 12px;
+}

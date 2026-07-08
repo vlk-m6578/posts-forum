@@ -1,0 +1,25 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  font-size: 60px;
+  letter-spacing: -0.04em;
+  margin-left: 20px;
+}
+
+.content {
+  background-image: url('../../assets/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  margin: 0 28px;
+  border-radius: 5px;
+  position: relative;
+
+  /* min-height: 600px; */
+  overflow-y: auto;
+}

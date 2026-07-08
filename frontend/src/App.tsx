@@ -1,12 +1,13 @@
-import { Button } from "@/components/Button/Button";
+import { NavBar } from "@/components/NavBar/NavBar"
+import styles from './App.module.css'
+import { MainLayout } from "./components/MainLayout/MainLayout"
+import { Profile } from "./components/Profile/Profile"
 
-function App() {
+export const App = () => {
 
   return (
-    <div>posts forum
-      <Button/>
+    <div className={styles.container}>
+      <MainLayout />
     </div>
   )
 }
-
-export default App

@@ -1,0 +1,21 @@
+.btn {
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+}
+
+.edit {
+  background-image: url('../../assets/edit.svg');
+}
+
+.create {
+  background-color: transparent;
+  color: white;
+  font-size: 40px;
+}
+
+.logout {
+  background-image: url('../../assets/logout.svg');
+}

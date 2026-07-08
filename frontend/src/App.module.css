@@ -1,0 +1,14 @@
+.container {
+  width: 1190px;
+  height: 900px;
+  background-color: white;
+  border-radius: 20px;
+  margin: 0 auto;
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90vw;
+        height: 90vh;
+    }
+}
