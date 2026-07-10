@@ -4,10 +4,8 @@ import photo1 from '@/assets/examples/ex1.png'
 import photo2 from '@/assets/examples/ex2.png'
 import photo3 from '@/assets/examples/ex3.png'
 import photo4 from '@/assets/examples/ex5.png'
-
-interface Photo {
-  url: string
-}
+import { PhotosGrid } from '../PhotosGrid/PhotosGrid'
+import type { Photo } from '@/types/photo'
 
 export const Post = () => {
 
@@ -18,8 +16,6 @@ export const Post = () => {
     { url: photo4 },
   ]
 
-  const gridClass = styles[`grid_${photos.length}`];
-
   return (
     <div className={styles.post}>
       <div className={styles.head}>
@@ -27,13 +23,7 @@ export const Post = () => {
         <span className={styles.description}>Loremectetur adipisicing elit. Magni, delectus!Lorem ipsum dolor sit amet consectetur adipisicing eli</span>
       </div>
 
-      <div className={`${styles.content} ${gridClass}`}>
-        {photos.map((photo, index) => {
-          return <div key={index} className={styles.image}>
-            <img src={photo.url}></img>
-          </div>
-        })}
-      </div>
+      <PhotosGrid photos={photos} />
 
       <div className={styles.info}>
         <div className={styles.author}>
@@ -48,7 +38,7 @@ export const Post = () => {
       </div>
 
       <div className={styles.footer}>
-        <button className={styles.like}>♥</button>
+        <button className={styles.like}>♡</button>
         <button className={styles.comment}>comment</button>
       </div>
     </div>

@@ -4,19 +4,20 @@ import { MainPage } from '@/pages/MainPage/MainPage'
 import { PostsPage } from '@/pages/PostsPage/PostsPage'
 import { NavBar } from '../NavBar/NavBar'
 import { Profile } from '../Profile/Profile'
+import { ROUTES } from '@/constants/routes'
 
 export const MainLayout = () => {
   return (
     <main className={styles.main}>
-      <NavBar/>
+      <NavBar />
       <div className={styles.header}>Posts Forum</div>
       <div className={styles.content}>
         <Routes>
-          <Route path='/' element={<PostsPage />} />
-          <Route path='/feed' element={<MainPage />} />
+          <Route path={ROUTES.HOME} element={<PostsPage />} />
+          <Route path={ROUTES.FEED} element={<MainPage />} />
         </Routes>
       </div>
-      <Profile/>
+      <Profile />
     </main>
   )
 }

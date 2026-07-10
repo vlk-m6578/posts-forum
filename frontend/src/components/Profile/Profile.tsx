@@ -1,3 +1,4 @@
+import { Button } from '../Button/Button'
 import styles from './Profile.module.css'
 import profilePhoto from '@/assets/profile-photo.png'
 
@@ -13,13 +14,13 @@ export const Profile = () => {
           </div>
         </div>
         <div className={styles.btns}>
-          <button className={`${styles.btn} ${styles.edit_btn}`}></button>
-          <button className={`${styles.btn} ${styles.logout_btn}`}></button>
+          <Button variant='edit'></Button>
+          <Button variant='logout'></Button>
         </div>
       </div>
 
       <div className={styles.btns}>
-        <button className={styles.create_btn}>+</button>
+        <Button variant='create'>+</Button>
       </div>
     </div>
   )

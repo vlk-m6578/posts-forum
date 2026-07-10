@@ -1,13 +1,15 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react"
 import styles from './Button.module.css'
+import type React from 'react';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  variant?: 'edit' | 'create' | 'logout';
+interface ButtonProps {
+  variant: string;
+  children?: React.ReactNode;
 }
 
-export const Button = ({ children, variant }: ButtonProps) => {
+export const Button = ({ variant, children }: ButtonProps) => {
+  const btnClass = styles[`${variant}`];
+
   return (
-    <button className={`${styles.btn} ${styles[variant as keyof typeof styles || '']}`}>{children}</button>
+    <button className={`${styles.btn} ${btnClass}`}>{children}</button>
   )
 }
