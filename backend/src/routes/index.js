@@ -7,6 +7,8 @@ const authRoutes =
 const postRoutes =
   require("./post.routes");
 
+const commentRoutes =
+  require("./comment.routes");
 
 router.use(
   "/auth",
@@ -18,6 +20,10 @@ router.use(
   postRoutes
 );
 
+router.use(
+  "/comments",
+  commentRoutes
+);
 
 router.get("/health", (req, res) => {
 
