@@ -32,7 +32,7 @@ async function create(req, res) {
 async function getAll(req, res) {
 
   const posts =
-    await postService.getPosts();
+    await postService.getPosts(req.query);
 
 
   res.json(posts);

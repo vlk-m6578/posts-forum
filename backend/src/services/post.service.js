@@ -38,21 +38,42 @@ async function createPost(data, userId) {
 
 
 
-async function getPosts() {
+async function getPosts(filters = {}) {
 
+  const where = {};
+
+  if (filters.country) {
+    where.country = filters.country;
+  }
+
+  if (filters.city) {
+    where.city = filters.city;
+  }
 
   return prisma.post.findMany({
 
+    where,
+
     include: {
+
       author: {
+
         select: {
-          username: true
+          username: true,
+          city: true
         }
+
       },
 
-      comments: true,
+      _count: {
 
-      likes: true
+        select: {
+          likes: true,
+          comments: true
+        }
+
+      }
+
     },
 
     orderBy: {
@@ -61,13 +82,11 @@ async function getPosts() {
 
   });
 
-
 }
 
 
 
 async function getPostById(id) {
-
 
   return prisma.post.findUnique({
 
@@ -76,13 +95,35 @@ async function getPostById(id) {
     },
 
     include: {
-      author: true,
-      comments: true,
-      likes: true
+
+      author: {
+        select: {
+          username: true,
+          city: true,
+          country: true
+        }
+      },
+
+      comments: {
+        include: {
+          author: {
+            select: {
+              username: true
+            }
+          }
+        }
+      },
+
+      _count: {
+        select: {
+          likes: true,
+          comments: true
+        }
+      }
+
     }
 
   });
-
 
 }
 
