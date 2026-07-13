@@ -1,10 +1,23 @@
 const router = require("express").Router();
 
 
-router.get("/health", (req, res) => {
+const authRoutes =
+require("./auth.routes");
+
+
+router.use(
+"/auth",
+authRoutes
+);
+
+
+
+router.get("/health",(req,res)=>{
+
     res.json({
-        status: "OK"
+        status:"OK"
     });
+
 });
 
 
