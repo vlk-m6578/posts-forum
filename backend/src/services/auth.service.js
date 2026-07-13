@@ -1,96 +1,104 @@
 const prisma = require("../config/prisma");
 const bcrypt = require("bcrypt");
-const {generateToken}=require("../utils/jwt");
+const generateToken = require("../utils/jwt");
 
 
 
-const register = async(data)=>{
+async function register(data) {
 
 
-    const existing = await prisma.user.findUnique({
-        where:{
-            email:data.email
-        }
-    });
-
-
-    if(existing){
-        throw new Error("Email already exists");
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: data.email
     }
+  });
 
 
-    const hash = await bcrypt.hash(
-        data.password,
-        10
+  if (existingUser) {
+    throw new Error("Email already exists");
+  }
+
+
+
+  const hashedPassword =
+    await bcrypt.hash(
+      data.password,
+      10
     );
 
 
-    const user = await prisma.user.create({
 
-        data:{
-            username:data.username,
-            email:data.email,
-            password:hash,
-            country:data.country,
-            city:data.city
-        }
+  const user = await prisma.user.create({
 
-    });
-
-
-    return user;
-
-};
-
-
-
-const login = async(email,password)=>{
-
-
-    const user = await prisma.user.findUnique({
-        where:{
-            email
-        }
-    });
-
-
-    if(!user){
-        throw new Error("Invalid credentials");
+    data: {
+      username: data.username,
+      email: data.email,
+      password: hashedPassword,
+      country: data.country,
+      city: data.city
     }
 
+  });
 
-    const valid = await bcrypt.compare(
-        password,
-        user.password
+
+  return user;
+
+}
+
+
+
+
+async function login(email, password) {
+
+
+  const user =
+    await prisma.user.findUnique({
+      where: {
+        email
+      }
+    });
+
+
+
+  if (!user) {
+    throw new Error("Invalid email or password");
+  }
+
+
+
+  const passwordValid =
+    await bcrypt.compare(
+      password,
+      user.password
     );
 
 
-    if(!valid){
-        throw new Error("Invalid credentials");
+
+  if (!passwordValid) {
+    throw new Error("Invalid email or password");
+  }
+
+
+
+  const token =
+    generateToken(user);
+
+
+
+  return {
+    token,
+    user: {
+      id: user.id,
+      username: user.username,
+      role: user.role
     }
+  };
+
+}
 
 
 
-    const token = generateToken({
-
-        id:user.id,
-
-        role:user.role
-
-    });
-
-
-
-    return {
-        token,
-        user
-    };
-
-};
-
-
-
-module.exports={
-    register,
-    login
+module.exports = {
+  register,
+  login
 };

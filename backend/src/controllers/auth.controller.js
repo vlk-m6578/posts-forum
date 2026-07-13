@@ -2,12 +2,14 @@ const authService = require("../services/auth.service");
 
 
 
-const register = async(req,res)=>{
-
+async function register(req,res){
 
     try{
 
-        const user = await authService.register(req.body);
+        const user =
+            await authService.register(
+                req.body
+            );
 
 
         res.status(201).json(user);
@@ -21,21 +23,20 @@ const register = async(req,res)=>{
 
     }
 
-};
+}
 
 
 
-const login = async(req,res)=>{
 
+async function login(req,res){
 
     try{
 
-
         const result =
-        await authService.login(
-            req.body.email,
-            req.body.password
-        );
+            await authService.login(
+                req.body.email,
+                req.body.password
+            );
 
 
         res.json(result);
@@ -49,23 +50,11 @@ const login = async(req,res)=>{
 
     }
 
-
-};
-
-
-
-const me = async(req,res)=>{
-
-
-    res.json(req.user);
-
-
-};
+}
 
 
 
 module.exports={
     register,
-    login,
-    me
+    login
 };

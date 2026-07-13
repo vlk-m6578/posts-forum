@@ -2,21 +2,21 @@ const router = require("express").Router();
 
 
 const authRoutes =
-require("./auth.routes");
+  require("./auth.routes");
 
 
 router.use(
-"/auth",
-authRoutes
+  "/auth",
+  authRoutes
 );
 
 
 
-router.get("/health",(req,res)=>{
+router.get("/health", (req, res) => {
 
-    res.json({
-        status:"OK"
-    });
+  res.json({
+    status: "OK"
+  });
 
 });
 

@@ -1,29 +1,19 @@
 const router = require("express").Router();
 
 const controller =
-require("../controllers/auth.controller");
-
-const auth =
-require("../middleware/auth.middleware");
+  require("../controllers/auth.controller");
 
 
 
 router.post(
-"/register",
-controller.register
+  "/register",
+  controller.register
 );
 
 
 router.post(
-"/login",
-controller.login
-);
-
-
-router.get(
-"/me",
-auth,
-controller.me
+  "/login",
+  controller.login
 );
 
 

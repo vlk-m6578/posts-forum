@@ -1,19 +1,20 @@
 const jwt = require("jsonwebtoken");
 
 
-const generateToken = (payload) => {
+function generateToken(user) {
 
-    return jwt.sign(
-        payload,
-        process.env.JWT_SECRET,
-        {
-            expiresIn: "7d"
-        }
-    );
+  return jwt.sign(
+    {
+      id: user.id,
+      role: user.role
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "7d"
+    }
+  );
 
-};
+}
 
 
-module.exports = {
-    generateToken
-};
+module.exports = generateToken;
