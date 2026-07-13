@@ -30,6 +30,7 @@ async function create(req, res) {
 
 
 async function getAll(req, res) {
+  console.log(req.query);
 
   const posts =
     await postService.getPosts(req.query);

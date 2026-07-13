@@ -50,6 +50,29 @@ async function getPosts(filters = {}) {
     where.city = filters.city;
   }
 
+  if (filters.search) {
+    where.title = {
+      contains: filters.search,
+      mode: "insensitive"
+    };
+  }
+
+  let orderBy = {
+    createdAt: "desc"
+  };
+
+  if (filters.sort === "oldest") {
+    orderBy = {
+      createdAt: "asc"
+    };
+  }
+
+  if (filters.sort === "newest") {
+    orderBy = {
+      createdAt: "desc"
+    };
+  }
+
   return prisma.post.findMany({
 
     where,
@@ -76,9 +99,7 @@ async function getPosts(filters = {}) {
 
     },
 
-    orderBy: {
-      createdAt: "desc"
-    }
+    orderBy
 
   });
 
