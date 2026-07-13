@@ -86,10 +86,104 @@ async function getPostById(id) {
 
 }
 
+async function updatePost(id, data, user) {
 
+  const post = await prisma.post.findUnique({
+    where: {
+      id: Number(id)
+    }
+  });
+
+
+  if (!post) {
+    throw new Error("Post not found");
+  }
+
+
+  // USER может менять только свой пост
+  if (
+    post.authorId !== user.id &&
+    user.role !== "ADMIN"
+  ) {
+    throw new Error(
+      "You can edit only your posts"
+    );
+  }
+
+
+  return prisma.post.update({
+
+    where: {
+      id: Number(id)
+    },
+
+    data: {
+      title: data.title,
+      description: data.description,
+      images: data.images,
+      country: data.country,
+      city: data.city
+    }
+
+  });
+
+}
+
+
+
+async function deletePost(id, user) {
+
+
+  const post = await prisma.post.findUnique({
+    where: {
+      id: Number(id)
+    }
+  });
+
+
+
+  if (!post) {
+    throw new Error("Post not found");
+  }
+
+
+
+  // USER только свой
+  // ADMIN любой
+
+  if (
+    post.authorId !== user.id &&
+    user.role !== "ADMIN"
+  ) {
+
+    throw new Error(
+      "You can delete only your posts"
+    );
+
+  }
+
+
+
+  await prisma.post.delete({
+
+    where: {
+      id: Number(id)
+    }
+
+  });
+
+
+
+  return {
+    message: "Post deleted"
+  };
+
+}
 
 module.exports = {
   createPost,
   getPosts,
-  getPostById
+  getPostById,
+  updatePost,
+  deletePost
 };

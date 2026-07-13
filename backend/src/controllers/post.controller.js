@@ -53,10 +53,66 @@ async function getOne(req, res) {
 
 }
 
+async function update(req, res) {
 
+  try {
+
+
+    const post =
+      await postService.updatePost(
+        req.params.id,
+        req.body,
+        req.user
+      );
+
+
+    res.json(post);
+
+
+
+  } catch (error) {
+
+    res.status(400).json({
+      message: error.message
+    });
+
+  }
+
+}
+
+
+
+
+async function remove(req, res) {
+
+  try {
+
+
+    const result =
+      await postService.deletePost(
+        req.params.id,
+        req.user
+      );
+
+
+    res.json(result);
+
+
+
+  } catch (error) {
+
+    res.status(400).json({
+      message: error.message
+    });
+
+  }
+
+}
 
 module.exports = {
   create,
   getAll,
-  getOne
+  getOne,
+  update,
+  remove
 };
