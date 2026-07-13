@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: postgres:16
+
+    container_name: forum_db
+
+    restart: always
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: forum_db
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+
+    container_name: forum_backend
+
+    restart: always
+
+    depends_on:
+      - db
+
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - ./backend/.env.docker
+
+    volumes:
+      - ./backend:/app
+
+volumes:
+  postgres_data:
