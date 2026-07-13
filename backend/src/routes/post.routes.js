@@ -1,0 +1,32 @@
+const router = require("express").Router();
+
+const controller =
+  require("../controllers/post.controller");
+
+const auth =
+  require("../middleware/auth.middleware");
+
+
+
+router.get(
+  "/",
+  controller.getAll
+);
+
+
+router.get(
+  "/:id",
+  controller.getOne
+);
+
+
+
+router.post(
+  "/",
+  auth,
+  controller.create
+);
+
+
+
+module.exports = router;
