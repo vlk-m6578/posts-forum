@@ -14,8 +14,8 @@ export const NavBar = () => {
       </div>
 
       <div className={styles.exit}>
-        <NavLink to="/exit">lyalya</NavLink>
-        <NavLink to="/exit">bebe</NavLink>
+        <NavLink to="/login">login</NavLink>
+        <NavLink to="/exit">register</NavLink>
       </div>
     </nav>
   )

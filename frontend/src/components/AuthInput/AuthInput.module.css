@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+.auth__input {
+  position: relative;
+}
+
+.auth__input input {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  width: 352px;
+  height: 45px;
+
+  font-weight: 700;
+  font-size: 15px;
+  color: #A5A5A5;
+  background-color: #2C1E18;
+  border: 1px solid #FFFFFF;
+  border-radius: 15px;
+
+  padding-left: 55px;
+}

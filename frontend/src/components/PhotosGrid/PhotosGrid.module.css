@@ -3,6 +3,13 @@
   gap: 12px;
 }
 
+.grid_1 {
+  display: grid;
+  grid-template-rows: 1;
+  grid-template-columns: 1;
+  grid-template-areas: "img1";
+}
+
 .grid_2 {
   display: grid;
   grid-template-rows: repeat(1fr, 2);

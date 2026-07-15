@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.auth {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  background-color: #2C1E18;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  height: 580px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+.auth__form_wrapper {}
+
+.auth__input_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.auth__forgot_span {
+  font-weight: 400;
+  font-size: 10px;
+  text-align: end;
+  margin-top: 5px;
+  margin-bottom: 22px;
+}
+
+.auth__btn {
+  width: 411px;
+  height: 45px;
+  font-size: 15px;
+  color: #36981D;
+  border: 2px solid #36981D;
+  background-color: #2C1E18;
+  border-radius: 15px;
+  text-align: center;
+
+  margin-bottom: 6px;
+}
+
+.auth__note {
+  font-size: 14px;
+}
+
+.auth__note a {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  color: #AD7750;
+
+  cursor: pointer;
+}
+
+.auth__circle_top {
+  position: absolute;
+  width: 775px;
+  height: 775px;
+  left: -450px;
+  top: -450px;
+
+  background: #AD7750;
+  border-radius: 50%;
+}
+
+.auth__circle_bottom {
+  position: absolute;
+  width: 468.93px;
+  height: 468.93px;
+  left: -250px;
+  top: 450px;
+
+  background: #AD7750;
+  border-radius: 50%;
+}
+
+.auth__vector_bottom {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  left: 840px;
+  top: 200px;
+}
