@@ -1,21 +1,33 @@
 import styles from './NavBar.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/constants/routes';
+import { useStore } from '@/store/store';
 
 export const NavBar = () => {
+  const token = useStore(state => state.token);
+  const logout = useStore(state => state.logout);
+
+  const navigate = useNavigate();
+
+  const handleLogoutButtonClick = () => {
+    logout();
+    navigate(ROUTES.HOME);
+  }
+
   return (
     <nav className={styles.nav}>
       <div className={styles.name}>pupupu</div>
 
       <div className={styles.links}>
-        <NavLink to="/" className={styles.active}>about</NavLink>/
-        <NavLink to="/feed">feed</NavLink>/
-        <NavLink to="/new">my posts</NavLink>/
-        <NavLink to="/me">me</NavLink>
+        <NavLink to={ROUTES.HOME} className={styles.active}>about</NavLink>/
+        <NavLink to={ROUTES.FEED}>feed</NavLink>/
+        <NavLink to={ROUTES.MYPOSTS}>my posts</NavLink>/
+        <NavLink to={ROUTES.ME}>me</NavLink>
       </div>
 
       <div className={styles.exit}>
-        <NavLink to="/login">login</NavLink>
-        <NavLink to="/exit">register</NavLink>
+        {token ? <button onClick={handleLogoutButtonClick}>logout</button> : <><NavLink to={ROUTES.LOGIN}>login</NavLink>
+          <NavLink to={ROUTES.REGISTER}>register</NavLink></>}
       </div>
     </nav>
   )

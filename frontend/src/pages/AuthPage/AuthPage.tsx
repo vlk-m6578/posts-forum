@@ -4,8 +4,9 @@ import { UserIcon } from '@/components/Icons/UserIcon';
 import { LockIcon } from '@/components/Icons/LockIcon';
 import type React from 'react';
 import { useState } from 'react';
-import { login } from '@/api/auth';
 import { useStore } from '@/store/store';
+import { ROUTES } from '@/constants/routes';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 interface AuthPageProps {
   variant: 'Login' | 'Register';
@@ -26,16 +27,21 @@ export const AuthPage = ({ variant }: AuthPageProps) => {
     password: '',
     confirmPassword: '',
   })
+  const navigate = useNavigate();
+  
+  const isLoginPage = variant === 'Login';
 
   const handleAuthButtonClick = async () => {
-    if (variant === 'Login') {
+    if (isLoginPage) {
       try {
         await login(form.email, form.password);
+        navigate(ROUTES.ME);
       } catch (error) {
         console.log(error);
       }
-    } else if (variant === 'Register') {
+    } else if (!isLoginPage) {
       // register(...)
+      navigate(ROUTES.LOGIN);
     }
   }
 
@@ -60,7 +66,7 @@ export const AuthPage = ({ variant }: AuthPageProps) => {
 
         <div className={styles.auth__input_wrapper}>
           {
-            variant === 'Login' ? (
+            isLoginPage ? (
               <>
                 <AuthInput value={form.email} name='email' icon={<UserIcon />} placeholder='Email' type='email' onChange={handleInputChange} />
                 <AuthInput value={form.password} name='password' icon={<LockIcon />} placeholder='Password' type='password' onChange={handleInputChange} />
@@ -84,7 +90,7 @@ export const AuthPage = ({ variant }: AuthPageProps) => {
 
         <button className={styles.auth__btn} onClick={handleAuthButtonClick}>{variant}</button>
       </div>
-      <p className={styles.auth__note}>{variant === 'Login' ? 'Not a member yet? ' : 'Already have an Account? '}<a>{variant === 'Login' ? 'Register!' : 'Login!'}</a></p>
+      <p className={styles.auth__note}>{isLoginPage ? 'Not a member yet? ' : 'Already have an Account? '}<NavLink to={isLoginPage ? ROUTES.REGISTER : ROUTES.LOGIN}>{isLoginPage ? 'Register!' : 'Login!'}</NavLink></p>
     </div>
   )
 }

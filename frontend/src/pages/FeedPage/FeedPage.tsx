@@ -1,5 +1,5 @@
 import { PostCard } from '@/components/PostCard/PostCard'
-import styles from './MainPage.module.css'
+import styles from './FeedPage.module.css'
 import { useEffect, useState } from 'react'
 import { getPosts } from '@/api/posts'
 import type { Post } from '@/types/post'
@@ -16,7 +16,7 @@ const postExample = {
   images: [{ url: `${photo1}` }, { url: `${photo2}` }, { url: `${photo3}` }, { url: `${photo4}` }]
 }
 
-export const MainPage = () => {
+export const FeedPage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {

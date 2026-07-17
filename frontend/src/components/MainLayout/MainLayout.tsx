@@ -1,23 +1,20 @@
-import { Route, Routes } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import styles from './MainLayout.module.css'
-import { MainPage } from '@/pages/MainPage/MainPage'
-import { PostsPage } from '@/pages/PostsPage/PostsPage'
-import { NavBar } from '../NavBar/NavBar'
-import { Profile } from '../Profile/Profile'
-import { ROUTES } from '@/constants/routes'
+import { NavBar } from '@/components/NavBar/NavBar'
+import { Profile } from '@/components/Profile/Profile'
+import { useStore } from '@/store/store'
 
 export const MainLayout = () => {
+  const token = useStore(state => state.token);
+
   return (
     <main className={styles.main}>
       <NavBar />
       <div className={styles.header}>Posts Forum</div>
       <div className={styles.content}>
-        <Routes>
-          <Route path={ROUTES.HOME} element={<PostsPage />} />
-          <Route path={ROUTES.FEED} element={<MainPage />} />
-        </Routes>
+        <Outlet />
       </div>
-      <Profile />
+      {token ? <Profile /> : <></>}
     </main>
   )
 }
