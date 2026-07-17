@@ -12,19 +12,19 @@
   justify-content: center;
   gap: 6px;
 
-  height: 580px;
+  height: 620px;
 
   position: relative;
   overflow: hidden;
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 30px;
 }
 
 p {
-  font-size: 18px;
-  margin-bottom: 24px;
+  font-size: 16px;
+  margin-bottom: 16px;
 }
 
 .auth__form_wrapper {}
@@ -35,12 +35,18 @@ p {
   gap: 22px;
 }
 
-.auth__forgot_span {
+.auth__common {
+  display: flex;
+  justify-content: space-between;
+
   font-weight: 400;
   font-size: 10px;
-  text-align: end;
   margin-top: 5px;
   margin-bottom: 22px;
+}
+
+.auth__error {
+  color: #DC2626;
 }
 
 .auth__btn {

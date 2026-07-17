@@ -7,6 +7,9 @@ import { useState } from 'react';
 import { useStore } from '@/store/store';
 import { ROUTES } from '@/constants/routes';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { LocationIcon } from '@/components/Icons/LocationIcon';
+import { validatePassword } from '@/services/validationService';
+import { toast } from 'react-toastify';
 
 interface AuthPageProps {
   variant: 'Login' | 'Register';
@@ -15,20 +18,26 @@ interface AuthPageProps {
 interface Form {
   username: string;
   email: string;
+  country: string;
+  city: string;
   password: string;
   confirmPassword: string;
 }
 
 export const AuthPage = ({ variant }: AuthPageProps) => {
   const login = useStore(state => state.login);
+  const register = useStore(state => state.register);
   const [form, setForm] = useState<Form>({
     username: '',
     email: '',
+    country: '',
+    city: '',
     password: '',
     confirmPassword: '',
   })
+  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
-  
+
   const isLoginPage = variant === 'Login';
 
   const handleAuthButtonClick = async () => {
@@ -37,11 +46,19 @@ export const AuthPage = ({ variant }: AuthPageProps) => {
         await login(form.email, form.password);
         navigate(ROUTES.ME);
       } catch (error) {
-        console.log(error);
+        toast.error(`${error}`);
       }
     } else if (!isLoginPage) {
-      // register(...)
-      navigate(ROUTES.LOGIN);
+      if (!validatePassword(form.password, form.confirmPassword)) {
+        setError(`Passwords don't match`)
+        return;
+      }
+      try {
+        await register(form.username, form.email, form.password, form.country, form.city);
+        navigate(ROUTES.LOGIN);
+      } catch (error) {
+        toast.error(`${error}`);
+      }
     }
   }
 
@@ -75,6 +92,8 @@ export const AuthPage = ({ variant }: AuthPageProps) => {
               <>
                 <AuthInput value={form.username} name='username' icon={<UserIcon />} placeholder='Username' type='text' onChange={handleInputChange} />
                 <AuthInput value={form.email} name='email' icon={<UserIcon />} placeholder='Email' type='email' onChange={handleInputChange} />
+                <AuthInput value={form.country} name='country' icon={<LocationIcon />} placeholder='Country' type='text' onChange={handleInputChange} />
+                <AuthInput value={form.city} name='city' icon={<LocationIcon />} placeholder='City' type='text' onChange={handleInputChange} />
                 <AuthInput value={form.password} name='password' icon={<LockIcon />} placeholder='Password' type='password' onChange={handleInputChange} />
                 <AuthInput value={form.confirmPassword} name='confirmPassword' icon={<LockIcon />} placeholder='Re-enter Password' type='password' onChange={handleInputChange} />
               </>
@@ -84,8 +103,9 @@ export const AuthPage = ({ variant }: AuthPageProps) => {
 
         </div>
 
-        <div className={styles.auth__forgot_span}>
-          Forgot password?
+        <div className={styles.auth__common}>
+          <span className={styles.auth__error}>{error}</span>
+          <span className={styles.auth__forgot}>Forgot password?</span>
         </div>
 
         <button className={styles.auth__btn} onClick={handleAuthButtonClick}>{variant}</button>

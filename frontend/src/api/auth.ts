@@ -8,3 +8,13 @@ export const login = (email: string, password: string) => {
     password,
   });
 }
+
+export const register = (username: string, email: string, password: string, country: string, city: string) => {
+  return axios.post(`${baseUrl}/register`, {
+    username,
+    email,
+    password,
+    country,
+    city,
+  })
+}

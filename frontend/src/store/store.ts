@@ -1,4 +1,4 @@
-import { login } from "@/api/auth";
+import { login, register } from "@/api/auth";
 import { getUserById } from "@/api/users";
 import { getJwtToken, removeJwtToken, setJwtToken } from "@/services/storageService";
 import type { User } from "@/types/user";
@@ -9,8 +9,7 @@ interface State {
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-
-  register: () => void;
+  register: (username: string, email: string, password: string, country: string, city: string) => Promise<void>;
 }
 
 export const useStore = create<State>(set => ({
@@ -36,7 +35,7 @@ export const useStore = create<State>(set => ({
       token: null,
     })
   },
-  register: () => {
-
+  register: async(username, email, password, country, city) => {
+    await register(username, email, password, country, city);
   }
 }))
