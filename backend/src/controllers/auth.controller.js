@@ -2,59 +2,70 @@ const authService = require("../services/auth.service");
 
 
 
-async function register(req,res){
+async function register(req, res) {
 
-    try{
+  try {
 
-        const user =
-            await authService.register(
-                req.body
-            );
-
-
-        res.status(201).json(user);
+    const user =
+      await authService.register(
+        req.body
+      );
 
 
-    }catch(error){
-
-        res.status(400).json({
-            message:error.message
-        });
-
-    }
-
-}
+    res.status(201).json(user);
 
 
+  } catch (error) {
 
+    res.status(400).json({
+      message: error.message
+    });
 
-async function login(req,res){
-
-    try{
-
-        const result =
-            await authService.login(
-                req.body.email,
-                req.body.password
-            );
-
-
-        res.json(result);
-
-
-    }catch(error){
-
-        res.status(401).json({
-            message:error.message
-        });
-
-    }
+  }
 
 }
 
 
 
-module.exports={
-    register,
-    login
+
+async function login(req, res) {
+
+  try {
+
+    const result =
+      await authService.login(
+        req.body.email,
+        req.body.password
+      );
+
+
+    res.json(result);
+
+
+  } catch (error) {
+
+    res.status(401).json({
+      message: error.message
+    });
+
+  }
+
+}
+
+async function me(req, res) {
+  try {
+    const user = await authService.me(req.user.id);
+
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    });
+  }
+}
+
+module.exports = {
+  register,
+  login,
+  me
 };

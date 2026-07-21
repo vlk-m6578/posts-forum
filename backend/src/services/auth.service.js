@@ -96,9 +96,41 @@ async function login(email, password) {
 
 }
 
-
+async function me(id) {
+  return prisma.user.findUnique({
+    where: {
+      id
+    },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      role: true,
+      country: true,
+      city: true,
+      posts: {
+        orderBy: {
+          createdAt: "desc"
+        },
+        select: {
+          id: true,
+          title: true,
+          images: true,
+          createdAt: true,
+          _count: {
+            select: {
+              likes: true,
+              comments: true
+            }
+          }
+        }
+      }
+    }
+  });
+}
 
 module.exports = {
   register,
-  login
+  login,
+  me
 };

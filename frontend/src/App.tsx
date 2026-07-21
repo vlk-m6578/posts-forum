@@ -8,8 +8,15 @@ import { AboutPage } from '@/pages/AboutPage/AboutPage'
 import { ProfilePage } from './pages/ProfilePage/ProfilePage'
 import { MyPostsPage } from './pages/MyPostsPage/MyPostsPage'
 import { AuthRoute } from './components/AuthRoute/AuthRoute'
+import { useEffect } from 'react'
+import { useStore } from './store/store'
 
 export const App = () => {
+  const initializeAuth = useStore(state => state.initializeAuth);
+
+  useEffect(() => {
+    initializeAuth();
+  }, [])
 
   return (
     <div className={styles.container}>

@@ -32,7 +32,7 @@ p {
 .auth__input_wrapper {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 10px;
 }
 
 .auth__common {

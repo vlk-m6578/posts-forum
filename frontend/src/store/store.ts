@@ -1,4 +1,4 @@
-import { login, register } from "@/api/auth";
+import { getProfile, login, register } from "@/api/auth";
 import { getUserById } from "@/api/users";
 import { getJwtToken, removeJwtToken, setJwtToken } from "@/services/storageService";
 import type { User } from "@/types/user";
@@ -7,6 +7,8 @@ import { create } from "zustand";
 interface State {
   user: User | null;
   token: string | null;
+  isLoading: boolean;
+  initializeAuth: () => void;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   register: (username: string, email: string, password: string, country: string, city: string) => Promise<void>;
@@ -15,17 +17,46 @@ interface State {
 export const useStore = create<State>(set => ({
   user: null,
   token: getJwtToken(),
+  isLoading: false,
+  initializeAuth: async () => {
+    try {
+      const token = getJwtToken();
+      if (!token) return;
+
+      const res = await getProfile();
+
+      set({
+        user: res.data,
+        token,
+      })
+    } catch {
+      removeJwtToken();
+
+      set({
+        user: null,
+        token: null,
+      })
+    }
+  },
   login: async (email, password) => {
-    const res = await login(email, password);
-    setJwtToken(res.data.token);
+    try {
+      set({ isLoading: true });
 
-    const userProfile = await getUserById(res.data.user.id);
-    console.log(userProfile);
+      const res = await login(email, password);
+      setJwtToken(res.data.token);
 
-    set({
-      user: userProfile.data,
-      token: res.data.token,
-    })
+      const userProfile = await getUserById(res.data.user.id);
+
+      set({
+        user: userProfile.data,
+        token: res.data.token,
+        isLoading: false,
+      })
+    } finally {
+      set({
+        isLoading: false
+      })
+    }
   },
   logout: () => {
     removeJwtToken();
@@ -35,7 +66,13 @@ export const useStore = create<State>(set => ({
       token: null,
     })
   },
-  register: async(username, email, password, country, city) => {
-    await register(username, email, password, country, city);
+  register: async (username, email, password, country, city) => {
+    try {
+      await register(username, email, password, country, city);
+    } finally {
+      set({
+        isLoading: false
+      })
+    }
   }
 }))

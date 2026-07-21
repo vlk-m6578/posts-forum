@@ -8,8 +8,9 @@ import { useStore } from '@/store/store';
 import { ROUTES } from '@/constants/routes';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LocationIcon } from '@/components/Icons/LocationIcon';
-import { validatePassword } from '@/services/validationService';
+import { validateLoginForm, validateRegisterForm } from '@/services/validationService';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 interface AuthPageProps {
   variant: 'Login' | 'Register';
@@ -27,6 +28,7 @@ interface Form {
 export const AuthPage = ({ variant }: AuthPageProps) => {
   const login = useStore(state => state.login);
   const register = useStore(state => state.register);
+  const isLoading = useStore(state => state.isLoading);
   const [form, setForm] = useState<Form>({
     username: '',
     email: '',
@@ -42,15 +44,26 @@ export const AuthPage = ({ variant }: AuthPageProps) => {
 
   const handleAuthButtonClick = async () => {
     if (isLoginPage) {
+      const message = validateLoginForm(form.email, form.password);
+      if (message) {
+        setError(message);
+        return;
+      }
+
       try {
         await login(form.email, form.password);
         navigate(ROUTES.ME);
       } catch (error) {
-        toast.error(`${error}`);
+        if (axios.isAxiosError(error)) {
+          toast.error(error.response?.data?.message ?? 'Something went wrong');
+        } else {
+          setError('Something went wrong');
+        }
       }
     } else if (!isLoginPage) {
-      if (!validatePassword(form.password, form.confirmPassword)) {
-        setError(`Passwords don't match`)
+      const message = validateRegisterForm(form.username, form.email, form.country, form.city, form.password, form.confirmPassword);
+      if (message) {
+        setError(message);
         return;
       }
       try {
@@ -63,8 +76,12 @@ export const AuthPage = ({ variant }: AuthPageProps) => {
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError('');
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setForm(prev => ({
+      ...prev,
+      [name]: value,
+    }));
   }
 
 
@@ -108,7 +125,7 @@ export const AuthPage = ({ variant }: AuthPageProps) => {
           <span className={styles.auth__forgot}>Forgot password?</span>
         </div>
 
-        <button className={styles.auth__btn} onClick={handleAuthButtonClick}>{variant}</button>
+        <button className={styles.auth__btn} onClick={handleAuthButtonClick} disabled={isLoading}>{isLoading ? 'Loading...' : variant}</button>
       </div>
       <p className={styles.auth__note}>{isLoginPage ? 'Not a member yet? ' : 'Already have an Account? '}<NavLink to={isLoginPage ? ROUTES.REGISTER : ROUTES.LOGIN}>{isLoginPage ? 'Register!' : 'Login!'}</NavLink></p>
     </div>
