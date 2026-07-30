@@ -6,7 +6,21 @@ const controller =
 const auth =
   require("../middleware/auth.middleware");
 
+const upload =
+  require("../middleware/upload.middleware");
 
+router.post(
+  "/",
+  auth,
+  upload.array("images", 4),
+  controller.create
+);
+
+router.get(
+  "/my",
+  auth,
+  controller.getMy
+);
 
 router.get(
   "/",
@@ -18,7 +32,6 @@ router.get(
   "/:id",
   controller.getOne
 );
-
 
 
 router.post(

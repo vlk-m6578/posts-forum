@@ -1,0 +1,73 @@
+.create_form {
+  font-family: "PT Sans", sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.create_form__input_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.create_form__title {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.007em;
+  color: black;
+}
+
+.create_form__textarea {
+  resize: none;
+  border: 1px solid gray;
+  border-radius: 6px;
+  padding: 8px 12px 3px 12px;
+  color: black;
+  height: 20px;
+}
+
+.create_form__textarea:focus {
+  border-color: gray;
+  outline: none;
+}
+
+
+.create_form__limit {
+  color: gray;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.create_form__btns_wrapper {
+  display: flex;
+  justify-content: end;
+  gap: 5px;
+  padding-top: 12px;
+
+  border-top: 1px solid gray;
+}
+
+.create_form__btn {
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: -0.005em;
+  padding: 8px 20px;
+}
+
+.create_form__cancel_btn {
+  color: white;
+  background-color: #4b52e4;
+}
+
+.create_form__create_btn {
+  color: white;
+  background-color: #e2242f;
+}

@@ -4,7 +4,7 @@ import { UserIcon } from '@/components/Icons/UserIcon';
 import { LockIcon } from '@/components/Icons/LockIcon';
 import type React from 'react';
 import { useState } from 'react';
-import { useStore } from '@/store/store';
+import { useAuthStore } from '@/store/authStore';
 import { ROUTES } from '@/constants/routes';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LocationIcon } from '@/components/Icons/LocationIcon';
@@ -26,9 +26,9 @@ interface Form {
 }
 
 export const AuthPage = ({ variant }: AuthPageProps) => {
-  const login = useStore(state => state.login);
-  const register = useStore(state => state.register);
-  const isLoading = useStore(state => state.isLoading);
+  const login = useAuthStore(state => state.login);
+  const register = useAuthStore(state => state.register);
+  const isLoading = useAuthStore(state => state.isLoading);
   const [form, setForm] = useState<Form>({
     username: '',
     email: '',

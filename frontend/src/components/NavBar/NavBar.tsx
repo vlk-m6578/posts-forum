@@ -1,11 +1,11 @@
 import styles from './NavBar.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes';
-import { useStore } from '@/store/store';
+import { useAuthStore } from '@/store/authStore';
 
 export const NavBar = () => {
-  const token = useStore(state => state.token);
-  const logout = useStore(state => state.logout);
+  const token = useAuthStore(state => state.token);
+  const logout = useAuthStore(state => state.logout);
 
   const navigate = useNavigate();
 

@@ -4,7 +4,7 @@ import { getJwtToken, removeJwtToken, setJwtToken } from "@/services/storageServ
 import type { User } from "@/types/user";
 import { create } from "zustand";
 
-interface State {
+interface AuthState {
   user: User | null;
   token: string | null;
   isLoading: boolean;
@@ -14,7 +14,7 @@ interface State {
   register: (username: string, email: string, password: string, country: string, city: string) => Promise<void>;
 }
 
-export const useStore = create<State>(set => ({
+export const useAuthStore = create<AuthState>(set => ({
   user: null,
   token: getJwtToken(),
   isLoading: false,

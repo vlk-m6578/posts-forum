@@ -10,7 +10,13 @@
   border-radius: 20px;
 }
 
-.head {
+.post__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post__head {
   display: grid;
   grid-template-rows: max-content;
   grid-template-columns: 1fr 1fr;
@@ -20,17 +26,17 @@
   gap: 16px;
 }
 
-.header {
+.post__title {
   grid-area: header;
   font-weight: 600;
 }
 
-.description {
+.post__description {
   grid-area: description;
   font-weight: 400;
 }
 
-.info {
+.post__info {
   display: grid;
   grid-template-rows: max-content;
   grid-template-columns: 1fr 1fr;
@@ -38,7 +44,7 @@
   font-size: 10px;
 }
 
-.author {
+.post__author {
   grid-area: author;
 
   display: flex;
@@ -46,7 +52,7 @@
   text-align: center;
 }
 
-.date {
+.post__date {
   grid-area: date;
 
   display: flex;
@@ -54,21 +60,12 @@
   text-align: end;
 }
 
-.footer {
+.post__footer {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.footer button {
+.post__footer button {
   background-color: transparent;
-}
-
-.like {
-  color: red;
-  font-size: 30px;
-}
-
-.comment {
-  color: white;
 }

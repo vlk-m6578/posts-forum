@@ -1,8 +1,7 @@
 import styles from './PhotosGrid.module.css'
-import type { Photo } from '@/types/photo';
 
 interface PhotosGridProps {
-  photos: Photo[];
+  photos: string[];
 }
 
 export const PhotosGrid = ({ photos }: PhotosGridProps) => {
@@ -12,7 +11,7 @@ export const PhotosGrid = ({ photos }: PhotosGridProps) => {
     <div className={`${styles.content} ${gridClass}`}>
       {photos.map((photo, index) => {
         return <div key={index} className={styles.image}>
-          <img src={photo.url}></img>
+          <img src={photo}></img>
         </div>
       })}
     </div>

@@ -1,10 +1,27 @@
-import { useStore } from '@/store/store'
+import { useAuthStore } from '@/store/authStore'
 import { Button } from '../Button/Button'
 import styles from './Profile.module.css'
 import profilePhoto from '@/assets/profile-photo.png'
+import { useModalStore } from '@/store/modalStore'
+import { TYPES } from '@/constants/types'
 
 export const Profile = () => {
-  const user = useStore(state => state.user);
+  const user = useAuthStore(state => state.user);
+  const logout = useAuthStore(state => state.logout);
+
+  const openModal = useModalStore(state => state.openModal);
+
+  const handleEditButtonClick = () => {
+
+  }
+
+  const handleLogoutButtonClick = () => {
+    logout();
+  }
+
+  const handleCreateButtonClick = () => {
+    openModal(TYPES.ADD_POST);
+  }
 
   return (
     <div className={styles.profile}>
@@ -17,13 +34,13 @@ export const Profile = () => {
           </div>
         </div>
         <div className={styles.btns}>
-          <Button variant='edit'></Button>
-          <Button variant='logout'></Button>
+          <Button variant='edit' onButtonClick={handleEditButtonClick}></Button>
+          <Button variant='logout' onButtonClick={handleLogoutButtonClick}></Button>
         </div>
       </div>
 
       <div className={styles.btns}>
-        <Button variant='create'>+</Button>
+        <Button variant='create' onButtonClick={handleCreateButtonClick}>+</Button>
       </div>
     </div>
   )

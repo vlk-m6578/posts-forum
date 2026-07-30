@@ -2,31 +2,23 @@ const prisma = require("../config/prisma");
 
 
 
-async function createPost(data, userId) {
+async function createPost(data, files, userId) {
 
-
-  if (
-    !data.images ||
-    data.images.length < 1 ||
-    data.images.length > 4
-  ) {
-
-    throw new Error(
-      "Images must be from 1 to 4"
-    );
-
+  if (!files || files.length === 0) {
+    throw new Error("Select at least one image");
   }
 
-
+  const images = files.map(file => `/uploads/${file.filename}`);
 
   return prisma.post.create({
 
     data: {
       title: data.title,
       description: data.description,
-      images: data.images,
       country: data.country,
       city: data.city,
+
+      images,
 
       authorId: userId
     }
@@ -242,10 +234,39 @@ async function deletePost(id, user) {
 
 }
 
+async function getMyPosts(userId) {
+  return prisma.post.findMany({
+    where: {
+      authorId: userId
+    },
+
+    include: {
+      author: {
+        select: {
+          username: true,
+          city: true
+        }
+      },
+
+      _count: {
+        select: {
+          likes: true,
+          comments: true
+        }
+      }
+    },
+
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+}
+
 module.exports = {
   createPost,
   getPosts,
   getPostById,
   updatePost,
-  deletePost
+  deletePost,
+  getMyPosts
 };

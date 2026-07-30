@@ -9,10 +9,11 @@ import { ProfilePage } from './pages/ProfilePage/ProfilePage'
 import { MyPostsPage } from './pages/MyPostsPage/MyPostsPage'
 import { AuthRoute } from './components/AuthRoute/AuthRoute'
 import { useEffect } from 'react'
-import { useStore } from './store/store'
+import { useAuthStore } from './store/authStore'
+import { Modal } from './components/Modal/Modal'
 
 export const App = () => {
-  const initializeAuth = useStore(state => state.initializeAuth);
+  const initializeAuth = useAuthStore(state => state.initializeAuth);
 
   useEffect(() => {
     initializeAuth();
@@ -32,6 +33,7 @@ export const App = () => {
         <Route path={ROUTES.LOGIN} element={<AuthPage variant='Login' />} />
         <Route path={ROUTES.REGISTER} element={<AuthPage variant='Register' />} />
       </Routes>
+      <Modal />
     </div>
   )
 }

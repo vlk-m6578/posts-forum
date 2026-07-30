@@ -1,0 +1,34 @@
+.uploader {
+  display: flex;
+  flex-direction: column;
+}
+
+.uploader__add_btn {
+  padding: 10px;
+  border: 1px dashed gray;
+  border-radius: 6px;
+  background: transparent;
+}
+
+.uploader__images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: max-content;
+  padding-top: 5px;
+}
+
+.uploader__image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.uploader__image img {
+  width: 45px;
+
+
+}
+
+.uploader__delete_btn {
+  background: transparent;
+}

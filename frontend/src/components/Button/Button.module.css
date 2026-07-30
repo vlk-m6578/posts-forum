@@ -19,3 +19,16 @@
 .logout {
   background-image: url('../../assets/logout.svg');
 }
+
+.delete {
+  background-image: url('../../assets/delete.svg');
+}
+
+.like {
+  background-image: url('../../assets/like1.svg');
+
+}
+
+.unlike {
+  background-image: url('../../assets/like2.svg');
+}

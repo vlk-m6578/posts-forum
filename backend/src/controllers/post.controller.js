@@ -9,6 +9,7 @@ async function create(req, res) {
     const post =
       await postService.createPost(
         req.body,
+        req.files,
         req.user.id
       );
 
@@ -110,10 +111,16 @@ async function remove(req, res) {
 
 }
 
+async function getMy(req, res) {
+  const posts = await postService.getMyPosts(req.user.id);
+  res.json(posts);
+}
+
 module.exports = {
   create,
   getAll,
   getOne,
   update,
-  remove
+  remove,
+  getMy
 };
