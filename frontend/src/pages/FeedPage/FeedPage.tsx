@@ -8,12 +8,13 @@ import photo3 from '@/assets/examples/ex3.png'
 import photo4 from '@/assets/examples/ex5.png'
 import { usePostsStore } from '@/store/postsStore'
 
-const postExample = {
-  id: 999,
-  title: 'Title exmpl',
-  description: 'Description exmpl',
-  images: [{ url: `${photo1}` }, { url: `${photo2}` }, { url: `${photo3}` }, { url: `${photo4}` }]
-}
+// const postExample = {
+//   id: 999,
+//   title: 'Title exmpl',
+//   description: 'Description exmpl',
+//   images: '',
+//   createdAt: '',
+// }
 
 export const FeedPage = () => {
   const posts = usePostsStore(state => state.posts);
@@ -28,7 +29,7 @@ export const FeedPage = () => {
       {
         posts.map(post => <PostCard key={post.id} post={post} />)
       }
-      <PostCard post={postExample} />
+      {/* <PostCard post={postExample} /> */}
     </div>
   )
 }

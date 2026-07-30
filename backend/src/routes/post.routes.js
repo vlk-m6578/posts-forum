@@ -34,15 +34,10 @@ router.get(
 );
 
 
-router.post(
-  "/",
-  auth,
-  controller.create
-);
-
 router.put(
   "/:id",
   auth,
+  upload.array("images", 4),
   controller.update
 );
 

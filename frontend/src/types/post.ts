@@ -4,5 +4,19 @@ export interface Post {
   title: string;
   description: string;
   images: string[];
+  country: string;
+  city: string;
   createdAt: string;
+
+  author: {
+    id: number;
+    username: string;
+    city: string;
+    country: string;
+  };
+
+  _count: {
+    likes: number;
+    comments: number;
+  };
 }

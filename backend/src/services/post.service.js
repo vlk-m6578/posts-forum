@@ -140,7 +140,7 @@ async function getPostById(id) {
 
 }
 
-async function updatePost(id, data, user) {
+async function updatePost(id, data, files, user) {
 
   const post = await prisma.post.findUnique({
     where: {
@@ -164,6 +164,11 @@ async function updatePost(id, data, user) {
     );
   }
 
+  let images = post.images;
+
+  if (files && files.length > 0) {
+    images = files.map(file => `/uploads/${file.filename}`);
+  }
 
   return prisma.post.update({
 
@@ -174,7 +179,7 @@ async function updatePost(id, data, user) {
     data: {
       title: data.title,
       description: data.description,
-      images: data.images,
+      images,
       country: data.country,
       city: data.city
     }

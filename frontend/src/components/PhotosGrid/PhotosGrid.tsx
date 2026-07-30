@@ -11,7 +11,7 @@ export const PhotosGrid = ({ photos }: PhotosGridProps) => {
     <div className={`${styles.content} ${gridClass}`}>
       {photos.map((photo, index) => {
         return <div key={index} className={styles.image}>
-          <img src={photo}></img>
+          <img src={`http://localhost:5000${photo}`}></img>
         </div>
       })}
     </div>

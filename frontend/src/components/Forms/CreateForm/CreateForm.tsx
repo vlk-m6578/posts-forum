@@ -4,11 +4,14 @@ import { ImageUploader } from '@/components/ImageUploader/ImageUploader'
 import { useModalStore } from '@/store/modalStore';
 import { validateCreatePostForm } from '@/services/validationService';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 interface Errors {
   title: string | undefined,
   description: string | undefined,
   images: string | undefined,
+  country: string | undefined,
+  city: string | undefined,
 }
 
 export const CreateForm = () => {
@@ -16,23 +19,29 @@ export const CreateForm = () => {
   const setPostForm = usePostsStore(state => state.setPostForm);
   const clearPostForm = usePostsStore(state => state.clearPostForm);
 
+  const addPost = usePostsStore(state => state.addPost);
+
   const closeModal = useModalStore(state => state.closeModal);
 
   const [errors, setErrors] = useState<Errors>({
     title: '',
     description: '',
-    images: ''
+    images: '',
+    country: '',
+    city: ''
   });
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setErrors({
       title: '',
       description: '',
-      images: ''
+      images: '',
+      country: '',
+      city: ''
     });
     const { name, value } = e.target;
     setPostForm({
-      [name]: value
+      [name]: value.charAt(0).toUpperCase() + value.slice(1)
     })
   }
 
@@ -40,16 +49,24 @@ export const CreateForm = () => {
     closeModal();
   }
 
-  const handleCreateButtonClick = () => {
-    const messages = validateCreatePostForm(postForm.title, postForm.description, postForm.images);
+  const handleCreateButtonClick = async () => {
+    const messages = validateCreatePostForm(postForm.title, postForm.description, postForm.images, postForm.country, postForm.city);
     setErrors({
       title: messages.title,
       description: messages.description,
       images: messages.images,
+      country: messages.country,
+      city: messages.city,
     });
-    
-    if (messages.title || messages.description || messages.images) {
+
+    if (messages.title || messages.description || messages.images || messages.country || messages.city) {
       return;
+    }
+
+    try {
+      await addPost();
+    } catch (error) {
+      toast.error(`${error}`);
     }
 
     clearPostForm();
@@ -74,6 +91,18 @@ export const CreateForm = () => {
         <span className={styles.create_form__title}>Photos</span>
         <ImageUploader />
         <span className={styles.create_form__limit}>{errors.images}</span>
+      </div>
+
+      <div className={styles.create_form__input_wrapper}>
+        <span className={styles.create_form__title}>Country</span>
+        <textarea className={styles.create_form__textarea} name='country' value={postForm.country} onChange={handleTextareaChange}></textarea>
+        <span className={styles.create_form__limit}>{errors.country}</span>
+      </div>
+
+      <div className={styles.create_form__input_wrapper}>
+        <span className={styles.create_form__title}>City</span>
+        <textarea className={styles.create_form__textarea} name='city' value={postForm.city} onChange={handleTextareaChange}></textarea>
+        <span className={styles.create_form__limit}>{errors.city}</span>
       </div>
 
       <div className={styles.create_form__btns_wrapper}>

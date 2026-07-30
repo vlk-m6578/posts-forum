@@ -9,3 +9,7 @@ export const getPosts = () => {
 export const getMyPosts = () => {
   return api.get(`${baseUrl}/posts/my`);
 }
+
+export const addPost = (data: FormData) => {
+  return api.post(`${baseUrl}/posts`, data);
+}

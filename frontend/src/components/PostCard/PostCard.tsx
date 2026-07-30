@@ -34,13 +34,16 @@ export const PostCard = ({ post }: PostProps) => {
 
       <div className={styles.post__info}>
         <div className={styles.post__author}>
-          <span>name name nameee nam</span>
-          <span>country hyt qos / city hyt koqish</span>
+          <span>{post.author.username}</span>
+          <span>{post.country}/ {post.city}</span>
         </div>
 
         <div className={styles.post__date}>
-          <span>March 31th 2026</span>
-          <span>12:45</span>
+          <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+          <span>{new Date(post.createdAt).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}</span>
         </div>
       </div>
 

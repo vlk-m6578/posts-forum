@@ -25,24 +25,37 @@ export const validateRegisterForm = (username: string, email: string, country: s
   return '';
 }
 
-export const validateCreatePostForm = (title: string, description: string, images: Photo[]) => {
+export const validateCreatePostForm = (title: string, description: string, images: Photo[], country: string, city: string) => {
   if (!validateRequired(title)) return { title: 'Title is required' };
   if (!validateTitle(title)) return { title: 'Title must be between 1 and 30 characters' };
 
-  if (!validateRequired(description)) return {description: 'Description is required'};
-  if (!validateDescription(description)) return {description: 'Description must be between 1 and 200 characters'};
+  if (!validateRequired(description)) return { description: 'Description is required' };
+  if (!validateDescription(description)) return { description: 'Description must be between 1 and 200 characters' };
 
-  if (!validateImages(images)) return {images: 'You can upload only four images'};
+  if (!validateImages(images)) return { images: 'Upload at least one image' };
+
+  if (!validateCountry(country)) return { country: 'Country must be between 2 and 60 characters' }
+  if (!validateCity(city)) return { city: 'City must be between 2 and 100 characters' }
 
   return {
     title: '',
     description: '',
     images: '',
+    country: '',
+    city: '',
   };
 }
 
+const validateCity = (title: string) => {
+  return title.trim().length > 1 && title.trim().length <= 100;
+}
+
+const validateCountry = (title: string) => {
+  return title.trim().length > 1 && title.trim().length <= 60;
+}
+
 const validateImages = (images: Photo[]) => {
-  return images.length >= 0 && images.length <= 4;
+  return images.length > 0 && images.length <= 4;
 }
 
 const validateTitle = (title: string) => {

@@ -64,6 +64,7 @@ async function update(req, res) {
       await postService.updatePost(
         req.params.id,
         req.body,
+        req.files,
         req.user
       );
 
