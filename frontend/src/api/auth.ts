@@ -18,7 +18,3 @@ export const register = (username: string, email: string, password: string, coun
     city,
   })
 }
-
-export const getProfile = () => {
-  return api.get(`${baseUrl}/me`);
-}

@@ -1,0 +1,54 @@
+import { getProfile, updateProfile } from "@/api/users";
+import { create } from "zustand";
+
+interface UserProfile {
+  id: number;
+  username: string;
+  email: string;
+  country: string;
+  city: string;
+  createdAt: string;
+  count: {
+    posts: number;
+    likes: number;
+    comments: number;
+  };
+}
+
+interface ProfileState {
+  profile: UserProfile | null;
+  isLoading: boolean;
+  isUpdating: boolean;
+
+  getProfile: () => Promise<void>;
+  updateProfile: (data: { username: string; country: string; city: string }) => Promise<void>;
+  clearProfile: () => void;
+}
+
+export const useProfileStore = create<ProfileState>((set, get) => ({
+  profile: null,
+  isLoading: false,
+  isUpdating: false,
+
+  getProfile: async () => {
+    try {
+      set({ isLoading: true });
+      const res = await getProfile();
+      set({ profile: res.data });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+  updateProfile: async (data: { username: string; country: string; city: string }) => {
+    try {
+      set({ isUpdating: true });
+      const res = await updateProfile(data);
+      set({ profile: res.data });
+    } finally {
+      set({ isUpdating: false })
+    }
+  },
+  clearProfile: () => {
+    set({ profile: null });
+  },
+}))

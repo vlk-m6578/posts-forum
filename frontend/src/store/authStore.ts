@@ -1,5 +1,5 @@
-import { getProfile, login, register } from "@/api/auth";
-import { getUserById } from "@/api/users";
+import { login, register } from "@/api/auth";
+import { getProfile, getUserById } from "@/api/users";
 import { getJwtToken, removeJwtToken, setJwtToken } from "@/services/storageService";
 import type { User } from "@/types/user";
 import { create } from "zustand";
