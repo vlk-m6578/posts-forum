@@ -9,8 +9,7 @@ import photo4 from '@/assets/examples/ex5.png'
 import { usePostsStore } from '@/store/postsStore'
 
 export const FeedPage = () => {
-  const posts = usePostsStore(state => state.posts);
-  const getPosts = usePostsStore(state => state.getPosts);
+  const { posts, getPosts, isLoading } = usePostsStore();
 
   useEffect(() => {
     getPosts();
@@ -18,10 +17,25 @@ export const FeedPage = () => {
 
   return (
     <div className={styles.posts}>
-      {
-        posts.map(post => <PostCard key={post.id} post={post} showHeader={false} showFooter={true} />)
-      }
-      {/* <PostCard post={postExample} /> */}
+      {isLoading ? (
+        Array.from({ length: 6 }).map((_, index) => (
+          <PostCard
+            key={`skeleton-${index}`}
+            isLoading={true}
+            showHeader={false}
+            showFooter={true}
+          />
+        ))
+      ) : (
+        posts.map(post => (
+          <PostCard
+            key={post.id}
+            post={post}
+            showHeader={false}
+            showFooter={true}
+          />
+        ))
+      )}
     </div>
   )
 }

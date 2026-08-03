@@ -4,11 +4,8 @@ import { usePostsStore } from '@/store/postsStore';
 import { toast } from 'react-toastify';
 
 export const ConfirmForm = () => {
-  const closeModal = useModalStore(state => state.closeModal);
-
-  const selectedPostId = usePostsStore(state => state.selectedPostId);
-  const deletePost = usePostsStore(state => state.deletePost);
-  const setSelectedPostId = usePostsStore(state => state.setSelectedPostId);
+  const { closeModal } = useModalStore();
+  const { selectedPostId, deletePost, setSelectedPostId } = usePostsStore();
 
   const handleCancelButtonClick = () => {
     setSelectedPostId(null);

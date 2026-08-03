@@ -5,7 +5,7 @@ import { Profile } from '@/components/Profile/Profile'
 import { useAuthStore } from '@/store/authStore'
 
 export const MainLayout = () => {
-  const token = useAuthStore(state => state.token);
+  const { token } = useAuthStore();
 
   return (
     <main className={styles.main}>

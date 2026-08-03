@@ -7,10 +7,8 @@ import { useModalStore } from '@/store/modalStore';
 import { TYPES } from '@/constants/types';
 
 export const MyPostsPage = () => {
-  const posts = usePostsStore(state => state.posts);
-  const getMyPosts = usePostsStore(state => state.getMyPosts);
-
-  const openModal = useModalStore(state => state.openModal);
+  const { posts, getMyPosts, isLoading } = usePostsStore();
+  const { openModal } = useModalStore();
 
   useEffect(() => {
     getMyPosts();
@@ -22,16 +20,30 @@ export const MyPostsPage = () => {
 
   return (
     <div className={styles.posts}>
-      {/* <a href='#end-of-page'>Create a new Post</a> */}
-
       <div className={styles.posts__btn}>
         <Button variant='create' onButtonClick={handleCreateButtonClick}>+</Button>
       </div>
 
       <div className={styles.posts__wrapper}>
-        {
-          posts.map(post => <PostCard key={post.id} post={post} showHeader={true} showFooter={false} />)
-        }
+        {isLoading ? (
+          Array.from({ length: 3 }).map((_, index) => (
+            <PostCard
+              key={`skeleton-${index}`}
+              isLoading={true}
+              showHeader={true}
+              showFooter={false}
+            />
+          ))
+        ) : (
+          posts.map(post => (
+            <PostCard
+              key={post.id}
+              post={post}
+              showHeader={true}
+              showFooter={false}
+            />
+          ))
+        )}
 
         <span id='end-of-page'></span>
       </div>

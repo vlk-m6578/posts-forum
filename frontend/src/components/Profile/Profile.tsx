@@ -6,10 +6,8 @@ import { useModalStore } from '@/store/modalStore'
 import { TYPES } from '@/constants/types'
 
 export const Profile = () => {
-  const user = useAuthStore(state => state.user);
-  const logout = useAuthStore(state => state.logout);
-
-  const openModal = useModalStore(state => state.openModal);
+  const { user, logout } = useAuthStore();
+  const { openModal } = useModalStore();
 
   const handleEditButtonClick = () => {
 

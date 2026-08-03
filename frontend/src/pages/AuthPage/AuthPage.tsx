@@ -26,9 +26,8 @@ interface Form {
 }
 
 export const AuthPage = ({ variant }: AuthPageProps) => {
-  const login = useAuthStore(state => state.login);
-  const register = useAuthStore(state => state.register);
-  const isLoading = useAuthStore(state => state.isLoading);
+  const { login, register, isLoading } = useAuthStore();
+
   const [form, setForm] = useState<Form>({
     username: '',
     email: '',

@@ -5,9 +5,7 @@ import { TYPES } from '@/constants/types';
 import { ConfirmForm } from '../Forms/ConfirmForm/ConfirmForm';
 
 export const Modal = () => {
-  const type = useModalStore(state => state.type);
-  const isOpen = useModalStore(state => state.isOpen);
-  const closeModal = useModalStore(state => state.closeModal);
+  const { type, isOpen, closeModal } = useModalStore();
 
   if (!isOpen) return null;
 

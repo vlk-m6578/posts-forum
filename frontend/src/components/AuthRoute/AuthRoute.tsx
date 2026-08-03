@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 
 export const AuthRoute = () => {
-  const token = useAuthStore(state => state.token);
+  const { token } = useAuthStore();
 
   return token ? <Outlet /> : <Navigate to={ROUTES.LOGIN} replace />
 }

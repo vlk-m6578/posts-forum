@@ -4,8 +4,7 @@ import { ROUTES } from '@/constants/routes';
 import { useAuthStore } from '@/store/authStore';
 
 export const NavBar = () => {
-  const token = useAuthStore(state => state.token);
-  const logout = useAuthStore(state => state.logout);
+  const { token, logout } = useAuthStore();
 
   const navigate = useNavigate();
 

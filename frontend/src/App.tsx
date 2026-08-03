@@ -13,7 +13,7 @@ import { useAuthStore } from './store/authStore'
 import { Modal } from './components/Modal/Modal'
 
 export const App = () => {
-  const initializeAuth = useAuthStore(state => state.initializeAuth);
+  const { initializeAuth } = useAuthStore();
 
   useEffect(() => {
     initializeAuth();

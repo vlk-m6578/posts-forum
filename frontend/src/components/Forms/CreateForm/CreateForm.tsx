@@ -20,16 +20,8 @@ interface CreateFormProps {
 }
 
 export const CreateForm = ({ type }: CreateFormProps) => {
-  const postForm = usePostsStore(state => state.postForm);
-  const setPostForm = usePostsStore(state => state.setPostForm);
-  const clearPostForm = usePostsStore(state => state.clearPostForm);
-  const selectedPostId = usePostsStore(state => state.selectedPostId);
-  const setSelectedPostId = usePostsStore(state => state.setSelectedPostId);
-
-  const addPost = usePostsStore(state => state.addPost);
-  const updatePost = usePostsStore(state => state.updatePost);
-
-  const closeModal = useModalStore(state => state.closeModal);
+  const { postForm, setPostForm, clearPostForm, selectedPostId, setSelectedPostId, addPost, updatePost } = usePostsStore();
+  const { closeModal } = useModalStore();
 
   const [errors, setErrors] = useState<Errors>({
     title: '',
