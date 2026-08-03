@@ -3,19 +3,29 @@ import styles from './PostCard.module.css'
 import { PhotosGrid } from '../PhotosGrid/PhotosGrid'
 import type { Post } from '@/types/post'
 import { Button } from '../Button/Button'
+import { useModalStore } from '@/store/modalStore';
+import { TYPES } from '@/constants/types';
+import { usePostsStore } from '@/store/postsStore';
 
 interface PostProps {
   post: Post;
 }
 
 export const PostCard = ({ post }: PostProps) => {
+  const openModal = useModalStore(state => state.openModal);
+
+  const setPostFormFromPost = usePostsStore(state => state.setPostFormFromPost);
+  const setSelectedPostId = usePostsStore(state => state.setSelectedPostId);
 
   const handleUpdateButtonClick = () => {
-
+    setPostFormFromPost(post);
+    setSelectedPostId(post.id);
+    openModal(TYPES.UPDATE_POST);
   }
 
   const handleDeleteButtonClick = () => {
-
+    setSelectedPostId(post.id);
+    openModal(TYPES.DELETE_POST);
   }
 
   return (

@@ -1,0 +1,44 @@
+.confirm_form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm_form__title {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.007em;
+  color: black;
+
+}
+
+.confirm_form__btns {
+  display: flex;
+  gap: 8px;
+}
+
+.confirm_form__btn {
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: -0.005em;
+  padding: 8px 20px;
+}
+
+
+.confirm_form__cancel_btn {
+  color: white;
+  background-color: #4b52e4;
+}
+
+.confirm_form__delete_btn {
+  color: #e2242f;
+  background-color: white;
+  border: 1px solid #e2242f;
+}

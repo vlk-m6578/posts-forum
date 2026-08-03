@@ -2,8 +2,7 @@ import { useModalStore } from '@/store/modalStore'
 import styles from './Modal.module.css'
 import { CreateForm } from '../Forms/CreateForm/CreateForm';
 import { TYPES } from '@/constants/types';
-import { validateCreatePostForm } from '@/services/validationService';
-import { useState } from 'react';
+import { ConfirmForm } from '../Forms/ConfirmForm/ConfirmForm';
 
 export const Modal = () => {
   const type = useModalStore(state => state.type);
@@ -16,15 +15,33 @@ export const Modal = () => {
     closeModal();
   }
 
+  const getModalTitle = () => {
+    switch (type) {
+      case TYPES.ADD_POST:
+        return 'Add post'
+
+      case TYPES.UPDATE_POST:
+        return 'Edit post'
+
+      case TYPES.DELETE_POST:
+        return 'Delete post'
+
+      default:
+        return ''
+    }
+  }
+
   return (
     <div className={styles.modal}>
       <div className={styles.modal_content_wrapper}>
         <div className={styles.modal__header}>
-          <span className={styles.modal__title}>Add post</span>
+          <span className={styles.modal__title}>{getModalTitle()}</span>
           <button className={styles.modal__btn_close} onClick={handleButtonClick}></button>
         </div>
         <div className={styles.modal__content_body}>
-          {type === TYPES.ADD_POST && <CreateForm />}
+          {
+            type === TYPES.DELETE_POST ? <ConfirmForm /> : <CreateForm type={type} />
+          }
         </div>
 
         {/* <div className={styles.modal__btns_wrapper}>

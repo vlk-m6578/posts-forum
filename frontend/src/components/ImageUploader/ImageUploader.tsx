@@ -63,6 +63,10 @@ export const ImageUploader = () => {
               <div key={image.id} className={styles.uploader__image}>
                 <img src={image.image}></img>
                 <button className={styles.uploader__delete_btn} onClick={() => { handleDeleteButtonClick(image.id) }}>х</button>
+
+                {image.isExisting && (
+                  <span className={styles.uploader__existing_badge}>Existing</span>
+                )}
               </div>
             )
           })

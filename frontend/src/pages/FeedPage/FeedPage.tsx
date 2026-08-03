@@ -8,14 +8,6 @@ import photo3 from '@/assets/examples/ex3.png'
 import photo4 from '@/assets/examples/ex5.png'
 import { usePostsStore } from '@/store/postsStore'
 
-// const postExample = {
-//   id: 999,
-//   title: 'Title exmpl',
-//   description: 'Description exmpl',
-//   images: '',
-//   createdAt: '',
-// }
-
 export const FeedPage = () => {
   const posts = usePostsStore(state => state.posts);
   const getPosts = usePostsStore(state => state.getPosts);

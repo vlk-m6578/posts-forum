@@ -1,9 +1,6 @@
 const prisma = require("../config/prisma");
 
-
-
 async function createPost(data, files, userId) {
-
   if (!files || files.length === 0) {
     throw new Error("Select at least one image");
   }
@@ -11,27 +8,18 @@ async function createPost(data, files, userId) {
   const images = files.map(file => `/uploads/${file.filename}`);
 
   return prisma.post.create({
-
     data: {
       title: data.title,
       description: data.description,
       country: data.country,
       city: data.city,
-
       images,
-
       authorId: userId
     }
-
   });
-
-
 }
 
-
-
 async function getPosts(filters = {}) {
-
   const where = {};
 
   if (filters.country) {
@@ -66,49 +54,31 @@ async function getPosts(filters = {}) {
   }
 
   return prisma.post.findMany({
-
     where,
-
     include: {
-
       author: {
-
         select: {
           username: true,
           city: true
         }
-
       },
-
       _count: {
-
         select: {
           likes: true,
           comments: true
         }
-
       }
-
     },
-
     orderBy
-
   });
-
 }
 
-
-
 async function getPostById(id) {
-
   return prisma.post.findUnique({
-
     where: {
       id: Number(id)
     },
-
     include: {
-
       author: {
         select: {
           username: true,
@@ -116,7 +86,6 @@ async function getPostById(id) {
           country: true
         }
       },
-
       comments: {
         include: {
           author: {
@@ -126,56 +95,51 @@ async function getPostById(id) {
           }
         }
       },
-
       _count: {
         select: {
           likes: true,
           comments: true
         }
       }
-
     }
-
   });
-
 }
 
 async function updatePost(id, data, files, user) {
-
   const post = await prisma.post.findUnique({
     where: {
       id: Number(id)
     }
   });
 
-
   if (!post) {
     throw new Error("Post not found");
   }
 
-
-  // USER может менять только свой пост
-  if (
-    post.authorId !== user.id &&
-    user.role !== "ADMIN"
-  ) {
-    throw new Error(
-      "You can edit only your posts"
-    );
+  if (post.authorId !== user.id && user.role !== "ADMIN") {
+    throw new Error("You can edit only your posts");
   }
 
   let images = post.images;
 
+  if (data.existingImages) {
+    try {
+      const existingImages = JSON.parse(data.existingImages);
+      images = existingImages;
+    } catch (error) {
+      console.error('Error parsing existingImages:', error);
+    }
+  }
+
   if (files && files.length > 0) {
-    images = files.map(file => `/uploads/${file.filename}`);
+    const newImages = files.map(file => `/uploads/${file.filename}`);
+    images = [...images, ...newImages];
   }
 
   return prisma.post.update({
-
     where: {
       id: Number(id)
     },
-
     data: {
       title: data.title,
       description: data.description,
@@ -183,60 +147,33 @@ async function updatePost(id, data, files, user) {
       country: data.country,
       city: data.city
     }
-
   });
-
 }
 
-
-
 async function deletePost(id, user) {
-
-
   const post = await prisma.post.findUnique({
     where: {
       id: Number(id)
     }
   });
 
-
-
   if (!post) {
     throw new Error("Post not found");
   }
 
-
-
-  // USER только свой
-  // ADMIN любой
-
-  if (
-    post.authorId !== user.id &&
-    user.role !== "ADMIN"
-  ) {
-
-    throw new Error(
-      "You can delete only your posts"
-    );
-
+  if (post.authorId !== user.id && user.role !== "ADMIN") {
+    throw new Error("You can delete only your posts");
   }
 
-
-
   await prisma.post.delete({
-
     where: {
       id: Number(id)
     }
-
   });
-
-
 
   return {
     message: "Post deleted"
   };
-
 }
 
 async function getMyPosts(userId) {
@@ -244,7 +181,6 @@ async function getMyPosts(userId) {
     where: {
       authorId: userId
     },
-
     include: {
       author: {
         select: {
@@ -252,7 +188,6 @@ async function getMyPosts(userId) {
           city: true
         }
       },
-
       _count: {
         select: {
           likes: true,
@@ -260,7 +195,6 @@ async function getMyPosts(userId) {
         }
       }
     },
-
     orderBy: {
       createdAt: "desc"
     }

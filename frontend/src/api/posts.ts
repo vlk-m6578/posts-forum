@@ -13,3 +13,11 @@ export const getMyPosts = () => {
 export const addPost = (data: FormData) => {
   return api.post(`${baseUrl}/posts`, data);
 }
+
+export const updatePost = (id: number, data: FormData) => {
+  return api.put(`${baseUrl}/posts/${id}`, data);
+}
+
+export const deletePost = (id: number) => {
+  return api.delete(`${baseUrl}/posts/${id}`);
+}

@@ -1,4 +1,22 @@
-.posts {
+.posts {}
+
+.posts a {
+  display: inline-block;
+  padding: 12px;
+
+  border-radius: 8px;
+  border-bottom: 1px dotted #F7DAC5;
+  color: #F7DAC5;
+
+  margin: 25px 0px 0px 25px;
+}
+
+.posts__btn {
+  text-align: end;
+  margin: 25px 25px 0px 0px;
+}
+
+.posts__wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 25px;
