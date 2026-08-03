@@ -9,9 +9,11 @@ import { usePostsStore } from '@/store/postsStore';
 
 interface PostProps {
   post: Post;
+  showHeader?: boolean;
+  showFooter?: boolean;
 }
 
-export const PostCard = ({ post }: PostProps) => {
+export const PostCard = ({ post, showHeader = false, showFooter = true }: PostProps) => {
   const openModal = useModalStore(state => state.openModal);
 
   const setPostFormFromPost = usePostsStore(state => state.setPostFormFromPost);
@@ -30,10 +32,14 @@ export const PostCard = ({ post }: PostProps) => {
 
   return (
     <div className={styles.post}>
-      <div className={styles.post__header}>
-        <Button variant='edit' onButtonClick={handleUpdateButtonClick}></Button>
-        <Button variant='delete' onButtonClick={handleDeleteButtonClick}></Button>
-      </div>
+      {
+        showHeader && (
+          <div className={styles.post__header}>
+            <Button variant='edit' onButtonClick={handleUpdateButtonClick}></Button>
+            <Button variant='delete' onButtonClick={handleDeleteButtonClick}></Button>
+          </div>
+        )
+      }
 
       <div className={styles.post__head}>
         <span className={styles.post__title}>{post.title}</span>
@@ -57,9 +63,13 @@ export const PostCard = ({ post }: PostProps) => {
         </div>
       </div>
 
-      <div className={styles.post__footer}>
-        <Button variant='unlike' onButtonClick={handleDeleteButtonClick}></Button>
-      </div>
+      {
+        showFooter && (
+          <div className={styles.post__footer}>
+            <Button variant='unlike' onButtonClick={handleDeleteButtonClick}></Button>
+          </div>
+        )
+      }
     </div>
   )
 }

@@ -19,7 +19,7 @@ export const FeedPage = () => {
   return (
     <div className={styles.posts}>
       {
-        posts.map(post => <PostCard key={post.id} post={post} />)
+        posts.map(post => <PostCard key={post.id} post={post} showHeader={false} showFooter={true} />)
       }
       {/* <PostCard post={postExample} /> */}
     </div>

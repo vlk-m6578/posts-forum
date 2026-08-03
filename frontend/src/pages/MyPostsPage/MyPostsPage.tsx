@@ -30,7 +30,7 @@ export const MyPostsPage = () => {
 
       <div className={styles.posts__wrapper}>
         {
-          posts.map(post => <PostCard key={post.id} post={post} />)
+          posts.map(post => <PostCard key={post.id} post={post} showHeader={true} showFooter={false} />)
         }
 
         <span id='end-of-page'></span>
