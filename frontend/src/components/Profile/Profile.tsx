@@ -1,16 +1,20 @@
 import { useAuthStore } from '@/store/authStore'
 import { Button } from '../Button/Button'
 import styles from './Profile.module.css'
-import profilePhoto from '@/assets/profile-photo.png'
+import profilePhoto from '@/assets/avatar-placeholder.png'
 import { useModalStore } from '@/store/modalStore'
 import { TYPES } from '@/constants/types'
+import { useProfileStore } from '@/store/profileStore'
 
 export const Profile = () => {
   const { user, logout } = useAuthStore();
   const { openModal } = useModalStore();
+  const { toggleIsEditing } = useProfileStore();
+
 
   const handleEditButtonClick = () => {
-
+    // openModal(TYPES.UPDATE_PROFILE);
+    toggleIsEditing();
   }
 
   const handleLogoutButtonClick = () => {

@@ -1,3 +1,123 @@
 .profile {
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile__wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.profile__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.profile__edit_btn {
+  padding: 10px 20px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.profile__edit_btn:hover {
+  background: #357abd;
+}
+
+/* Карточка профиля */
+.profile__info {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+/* Аватар */
+.profile__avatar {
+  flex-shrink: 0;
+}
+
+/* Информация */
+.profile__info_wrapper {
+  flex: 1;
+}
+
+/* Форма редактирования */
+.profile__edit_form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.profile__input_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile__label {
+  font-size: 13px;
+  color: #555;
+  font-weight: 500;
+}
+
+.profile__input_wrapper input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.profile__input_wrapper input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.profile__error {
+  font-size: 12px;
+  color: #e74c3c;
+}
+
+/* Кнопки действий */
+.profile__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.profile__btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.profile__btn_cancel {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.profile__btn_save {
+  background: #4a90e2;
+  color: white;
 }

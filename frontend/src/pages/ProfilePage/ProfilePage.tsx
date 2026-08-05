@@ -1,12 +1,11 @@
-import { useAuthStore } from "@/store/authStore";
 import { useProfileStore } from "@/store/profileStore"
 import { useEffect, useState } from "react";
+import profilePhoto from '@/assets/avatar-placeholder.png'
 
 import styles from './ProfilePage.module.css'
 
 export const ProfilePage = () => {
-  const { profile, isLoading, isUpdating, getProfile, updateProfile } = useProfileStore();
-  const { user } = useAuthStore();
+  const { profile, isLoading, isUpdating, getProfile, updateProfile, isEditing, toggleIsEditing } = useProfileStore();
 
   const [formData, setFormData] = useState({
     username: '',
@@ -34,8 +33,86 @@ export const ProfilePage = () => {
     }
   }, [profile]);
 
+  const handleCancelButtonClick = () => {
+    toggleIsEditing();
+  }
+
+  const handleSaveButtonClick = () => {
+    //update
+
+    toggleIsEditing();
+  }
+
+  const handleInputChange = () => {
+
+  }
+
   return (
     <div className={styles.profile}>
+      <div className={styles.profile__wrapper}>
+        <div className={styles.profile__header}>My Profile</div>
+        <div className={styles.profile__info}>
+          <div className={styles.profile__avatar}>
+            <img src={profilePhoto}></img>
+          </div>
+
+          <div className={styles.profile__info_wrapper}>
+            {
+              isEditing ? (
+                <div className={styles.profile__edit_form}>
+                  <div className={styles.profile__input_wrapper}>
+                    <label className={styles.profile__label}>Username</label>
+                    <input type="text" name="username" value={formData.username} onChange={handleInputChange} placeholder="Enter username"></input>
+                    <span className={styles.profile__error}>{errors.username}</span>
+                  </div>
+
+                  <div className={styles.profile__input_wrapper}>
+                    <label className={styles.profile__label}>Country</label>
+                    <input type="text" name="country" value={formData.country} onChange={handleInputChange} placeholder="Enter country"></input>
+                    <span className={styles.profile__error}>{errors.country}</span>
+                  </div>
+
+                  <div className={styles.profile__input_wrapper}>
+                    <label className={styles.profile__label}>City</label>
+                    <input type="text" name="city" value={formData.city} onChange={handleInputChange} placeholder="Enter city"></input>
+                    <span className={styles.profile__error}>{errors.city}</span>
+                  </div>
+
+                  <div className={styles.profile__actions}>
+                    <button className={`${styles.profile__btn} ${styles.profile__cancel_btn}`} onClick={handleCancelButtonClick}>Cancel</button>
+                    <button className={`${styles.profile__btn} ${styles.profile__save_btn}`} onClick={handleSaveButtonClick} disabled={isUpdating}>Save</button>
+                  </div>
+                </div>
+
+
+              ) : (
+                <div className={styles.profile__details}>
+                  <div className={styles.profile__detail}>
+                    <span className={styles.profile__detail_header}>Username</span>
+                    <span className={styles.profile__detail_value}>{profile?.username}</span>
+                  </div>
+
+                  <div className={styles.profile__detail}>
+                    <span className={styles.profile__detail_header}>Email</span>
+                    <span className={styles.profile__detail_value}>{profile?.email}</span>
+                  </div>
+
+                  <div className={styles.profile__detail}>
+                    <span className={styles.profile__detail_header}>Location</span>
+                    <span className={styles.profile__detail_value}>{profile?.country}, {profile?.city}</span>
+                  </div>
+
+                  <div className={styles.profile__detail}>
+                    <span className={styles.profile__detail_header}>Member since</span>
+                    <span className={styles.profile__detail_value}>{profile?.createdAt ? new Date(profile?.createdAt).toLocaleDateString() : 'Not Available'}</span>
+                  </div>
+                </div>
+              )
+            }
+          </div>
+
+        </div>
+      </div>
 
     </div>
   )

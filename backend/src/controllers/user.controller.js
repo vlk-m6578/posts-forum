@@ -1,19 +1,5 @@
 const service = require("../services/user.service");
 
-async function getProfile(req, res) {
-  try {
-    const user = await service.getProfile(req.params.id);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.json(user);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-}
-
 async function getMyProfile(req, res) {
   try {
     const user = await service.getMyProfile(req.user.id);
@@ -37,8 +23,22 @@ async function updateProfile(req, res) {
   }
 }
 
+async function getProfile(req, res) {
+  try {
+    const user = await service.getProfile(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+
 module.exports = {
   getProfile,
-  getMyProfile,   
-  updateProfile   
+  getMyProfile,
+  updateProfile
 };

@@ -1,5 +1,5 @@
 import { login, register } from "@/api/auth";
-import { getProfile, getUserById } from "@/api/users";
+import { getMyProfile, getProfile, getUserById } from "@/api/users";
 import { getJwtToken, removeJwtToken, setJwtToken } from "@/services/storageService";
 import type { User } from "@/types/user";
 import { create } from "zustand";
@@ -23,7 +23,7 @@ export const useAuthStore = create<AuthState>(set => ({
       const token = getJwtToken();
       if (!token) return;
 
-      const res = await getProfile();
+      const res = await getMyProfile();
 
       set({
         user: res.data,

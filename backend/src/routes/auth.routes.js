@@ -15,10 +15,4 @@ router.post(
   controller.login
 );
 
-router.get(
-  "/me",
-  authMiddleware,
-  controller.me
-);
-
 module.exports = router;

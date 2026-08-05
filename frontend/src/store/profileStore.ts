@@ -1,4 +1,4 @@
-import { getProfile, updateProfile } from "@/api/users";
+import { getMyProfile, updateProfile } from "@/api/users";
 import { create } from "zustand";
 
 interface UserProfile {
@@ -19,24 +19,28 @@ interface ProfileState {
   profile: UserProfile | null;
   isLoading: boolean;
   isUpdating: boolean;
+  isEditing: boolean;
 
   getProfile: () => Promise<void>;
   updateProfile: (data: { username: string; country: string; city: string }) => Promise<void>;
   clearProfile: () => void;
+
+  toggleIsEditing: () => void;
 }
 
 export const useProfileStore = create<ProfileState>((set, get) => ({
   profile: null,
   isLoading: false,
   isUpdating: false,
+  isEditing: false,
 
   getProfile: async () => {
     try {
       set({ isLoading: true });
-      const res = await getProfile();
+      const res = await getMyProfile();
       set({ profile: res.data });
     } finally {
-      set({ isLoading: false });
+      set({ isLoading: false, isEditing: false });
     }
   },
   updateProfile: async (data: { username: string; country: string; city: string }) => {
@@ -51,4 +55,8 @@ export const useProfileStore = create<ProfileState>((set, get) => ({
   clearProfile: () => {
     set({ profile: null });
   },
+
+  toggleIsEditing: () => {
+    set(state => ({ isEditing: !state.isEditing }));
+  }
 }))
