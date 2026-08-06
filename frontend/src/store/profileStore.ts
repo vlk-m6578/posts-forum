@@ -40,7 +40,7 @@ export const useProfileStore = create<ProfileState>((set, get) => ({
       const res = await getMyProfile();
       set({ profile: res.data });
     } finally {
-      set({ isLoading: false, isEditing: false });
+      set({ isLoading: false });
     }
   },
   updateProfile: async (data: { username: string; country: string; city: string }) => {
@@ -48,6 +48,8 @@ export const useProfileStore = create<ProfileState>((set, get) => ({
       set({ isUpdating: true });
       const res = await updateProfile(data);
       set({ profile: res.data });
+    } catch (error) {
+      throw error;
     } finally {
       set({ isUpdating: false })
     }

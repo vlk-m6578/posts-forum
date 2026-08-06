@@ -1,5 +1,5 @@
 .profile {
-  max-width: 800px;
+  width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -7,36 +7,9 @@
 .profile__wrapper {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 30px;
 }
 
-.profile__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.profile__edit_btn {
-  padding: 10px 20px;
-  background: #4a90e2;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.profile__edit_btn:hover {
-  background: #357abd;
-}
-
-/* Карточка профиля */
 .profile__info {
   display: flex;
   gap: 30px;
@@ -46,34 +19,30 @@
   border-radius: 10px;
 }
 
-/* Аватар */
-.profile__avatar {
-  flex-shrink: 0;
+.profile__avatar {}
+
+.profile__avatar img {
+  width: 200px;
+  border-radius: 6px;
 }
 
-/* Информация */
-.profile__info_wrapper {
-  flex: 1;
-}
+.profile__info_wrapper {}
 
-/* Форма редактирования */
 .profile__edit_form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  width: 100%;
+  gap: 10px;
 }
 
 .profile__input_wrapper {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .profile__label {
   font-size: 13px;
   color: #555;
-  font-weight: 500;
 }
 
 .profile__input_wrapper input {
@@ -81,13 +50,6 @@
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
-  transition: border-color 0.2s;
-}
-
-.profile__input_wrapper input:focus {
-  outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
 .profile__error {
@@ -95,7 +57,6 @@
   color: #e74c3c;
 }
 
-/* Кнопки действий */
 .profile__actions {
   display: flex;
   gap: 10px;
@@ -104,20 +65,31 @@
 
 .profile__btn {
   padding: 10px 24px;
-  border: none;
   border-radius: 6px;
   font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
 }
 
-.profile__btn_cancel {
-  background: #e0e0e0;
+.profile__details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile__detail_header {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile__detail_value {
+  font-size: 14px;
   color: #333;
-}
-
-.profile__btn_save {
-  background: #4a90e2;
-  color: white;
+  font-weight: 500;
 }

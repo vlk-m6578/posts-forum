@@ -3,6 +3,14 @@ import { useEffect, useState } from "react";
 import profilePhoto from '@/assets/avatar-placeholder.png'
 
 import styles from './ProfilePage.module.css'
+import { toast } from "react-toastify";
+import { validateProfileForm } from "@/services/validationService";
+
+interface Errors {
+  username: string | undefined,
+  country: string | undefined,
+  city: string | undefined,
+}
 
 export const ProfilePage = () => {
   const { profile, isLoading, isUpdating, getProfile, updateProfile, isEditing, toggleIsEditing } = useProfileStore();
@@ -13,7 +21,7 @@ export const ProfilePage = () => {
     city: '',
   })
 
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<Errors>({
     username: '',
     country: '',
     city: ''
@@ -37,20 +45,47 @@ export const ProfilePage = () => {
     toggleIsEditing();
   }
 
-  const handleSaveButtonClick = () => {
-    //update
+  const handleSaveButtonClick = async () => {
+    const messages = validateProfileForm(formData.username, formData.country, formData.city);
 
-    toggleIsEditing();
+    setErrors({
+      username: messages.username,
+      country: messages.country,
+      city: messages.city,
+    });
+
+    if (messages.username || messages.country || messages.city) {
+      return;
+    }
+
+    try {
+      await updateProfile({
+        username: formData.username,
+        country: formData.country,
+        city: formData.city,
+      });
+      toast.success('Profile updated successfully');
+      toggleIsEditing();
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   }
 
-  const handleInputChange = () => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }
 
+  if(isLoading) {
+    return <div>Loading ...</div>
   }
 
   return (
     <div className={styles.profile}>
       <div className={styles.profile__wrapper}>
-        <div className={styles.profile__header}>My Profile</div>
         <div className={styles.profile__info}>
           <div className={styles.profile__avatar}>
             <img src={profilePhoto}></img>
@@ -79,8 +114,8 @@ export const ProfilePage = () => {
                   </div>
 
                   <div className={styles.profile__actions}>
-                    <button className={`${styles.profile__btn} ${styles.profile__cancel_btn}`} onClick={handleCancelButtonClick}>Cancel</button>
-                    <button className={`${styles.profile__btn} ${styles.profile__save_btn}`} onClick={handleSaveButtonClick} disabled={isUpdating}>Save</button>
+                    <button className={styles.profile__btn} onClick={handleCancelButtonClick}>Cancel</button>
+                    <button className={styles.profile__btn} onClick={handleSaveButtonClick} disabled={isUpdating}>Save</button>
                   </div>
                 </div>
 

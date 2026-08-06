@@ -46,6 +46,20 @@ export const validateCreatePostForm = (title: string, description: string, image
   };
 }
 
+export const validateProfileForm = (username: string, country: string, city: string) => {
+  if (!validateRequired(username)) return { username: 'Username is required' };
+  if (!validateUsernameLength(username)) return { username: 'Username must be at least 3 characters long' };
+
+  if (!validateCountry(country)) return { country: 'Country must be between 2 and 60 characters' }
+  if (!validateCity(city)) return { city: 'City must be between 2 and 100 characters' }
+
+  return {
+    username: '',
+    country: '',
+    city: '',
+  };
+}
+
 const validateCity = (title: string) => {
   return title.trim().length > 1 && title.trim().length <= 100;
 }

@@ -3,7 +3,6 @@ import styles from './Modal.module.css'
 import { CreateForm } from '../Forms/CreateForm/CreateForm';
 import { TYPES } from '@/constants/types';
 import { ConfirmForm } from '../Forms/ConfirmForm/ConfirmForm';
-import { ProfileForm } from '../Forms/ProfileForm/ProfileForm';
 
 export const Modal = () => {
   const { type, isOpen, closeModal } = useModalStore();
@@ -25,9 +24,6 @@ export const Modal = () => {
       case TYPES.DELETE_POST:
         return 'Delete post'
 
-      case TYPES.UPDATE_PROFILE:
-        return 'Update profile'
-
       default:
         return ''
     }
@@ -42,7 +38,7 @@ export const Modal = () => {
         </div>
         <div className={styles.modal__content_body}>
           {
-            type === TYPES.DELETE_POST ? <ConfirmForm /> : type === TYPES.UPDATE_PROFILE ? <ProfileForm /> : <CreateForm type={type} />
+            type === TYPES.DELETE_POST ? <ConfirmForm /> : <CreateForm type={type} />
           }
         </div>
 

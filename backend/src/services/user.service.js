@@ -77,7 +77,7 @@ async function updateProfile(userId, data) {
   }
 
   if (data.username && data.username !== user.username) {
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma.user.findFirst({
       where: {
         username: data.username
       }
