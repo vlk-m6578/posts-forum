@@ -64,8 +64,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 .post__footer button {
   background-color: transparent;
+}
+
+.post__footer_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.post__count {
+  font-size: 12px;
+  font-weight: 700;
 }

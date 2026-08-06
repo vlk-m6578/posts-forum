@@ -32,6 +32,14 @@ export const PostCard = ({ post, showHeader = false, showFooter = true, isLoadin
     openModal(TYPES.DELETE_POST);
   }
 
+  const handleLikeButtonClick = () => {
+    
+  }
+
+  const handleCommentButtonClick = () => {
+
+  }
+
   if (isLoading) {
     return (
       <div className={styles.post}>
@@ -116,7 +124,14 @@ export const PostCard = ({ post, showHeader = false, showFooter = true, isLoadin
       {
         showFooter && (
           <div className={styles.post__footer}>
-            <Button variant='unlike' onButtonClick={handleDeleteButtonClick}></Button>
+            <div className={styles.post__footer_wrapper}>
+              <span className={styles.post__count}>28</span>
+              <Button variant='unlike' onButtonClick={handleLikeButtonClick}></Button>
+            </div>
+            <div className={styles.post__footer_wrapper}>
+              <span className={styles.post__count}>28</span>
+              <Button variant="comment" onButtonClick={handleCommentButtonClick} />
+            </div>
           </div>
         )
       }
