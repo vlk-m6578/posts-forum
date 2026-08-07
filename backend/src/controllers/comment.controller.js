@@ -34,11 +34,17 @@ async function create(req, res) {
 async function getByPost(req, res) {
 
   try {
+    const postId = Number(req.params.postId);
 
+    if (isNaN(postId)) {
+      return res.status(400).json({
+        message: "Invalid post ID"
+      });
+    }
 
     const comments =
       await commentService.getPostComments(
-        req.params.postId
+        postId
       );
 
 
@@ -65,7 +71,9 @@ async function remove(req, res) {
 
     const result =
       await commentService.deleteComment(
-        req.params.id
+        req.params.id,
+        req.user.id,
+        req.user.role
       );
 
 

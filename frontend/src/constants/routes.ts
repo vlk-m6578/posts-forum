@@ -5,4 +5,5 @@ export const ROUTES = {
   REGISTER: '/register',
   MYPOSTS: '/my-posts',
   ME: '/me',
+  COMMENTS: '/posts/:postId/comments',
 }

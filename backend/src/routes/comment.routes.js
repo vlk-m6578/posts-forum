@@ -33,7 +33,6 @@ router.get(
 router.delete(
   "/:id",
   auth,
-  role("ADMIN"),
   controller.remove
 );
 

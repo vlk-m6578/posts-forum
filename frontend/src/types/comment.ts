@@ -7,7 +7,7 @@ export interface Comment {
   author: {
     username: string;
     country: string;
-    cityx: string;
+    city: string;
   };
 }
 

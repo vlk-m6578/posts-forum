@@ -7,6 +7,7 @@ import { useModalStore } from '@/store/modalStore';
 import { TYPES } from '@/constants/types';
 import { usePostsStore } from '@/store/postsStore';
 import Skeleton from 'react-loading-skeleton';
+import { useNavigate } from 'react-router-dom';
 
 interface PostProps {
   post?: Post;
@@ -18,6 +19,8 @@ interface PostProps {
 export const PostCard = ({ post, showHeader = false, showFooter = true, isLoading = false }: PostProps) => {
   const { openModal } = useModalStore();
   const { setPostFormFromPost, setSelectedPostId } = usePostsStore();
+
+  const navigate = useNavigate();
 
   const handleUpdateButtonClick = () => {
     if (!post) return;
@@ -33,11 +36,11 @@ export const PostCard = ({ post, showHeader = false, showFooter = true, isLoadin
   }
 
   const handleLikeButtonClick = () => {
-    
+
   }
 
   const handleCommentButtonClick = () => {
-
+    navigate(`/posts/${post?.id}/comments`);
   }
 
   if (isLoading) {
@@ -125,11 +128,11 @@ export const PostCard = ({ post, showHeader = false, showFooter = true, isLoadin
         showFooter && (
           <div className={styles.post__footer}>
             <div className={styles.post__footer_wrapper}>
-              <span className={styles.post__count}>28</span>
+              <span className={styles.post__count}>{post._count.likes}</span>
               <Button variant='unlike' onButtonClick={handleLikeButtonClick}></Button>
             </div>
             <div className={styles.post__footer_wrapper}>
-              <span className={styles.post__count}>28</span>
+              <span className={styles.post__count}>{post._count.comments}</span>
               <Button variant="comment" onButtonClick={handleCommentButtonClick} />
             </div>
           </div>

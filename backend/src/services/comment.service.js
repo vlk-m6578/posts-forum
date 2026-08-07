@@ -46,12 +46,16 @@ async function createComment(data, userId) {
 
 
 async function getPostComments(postId) {
+  const postIdNumber = Number(postId);
 
+  if (isNaN(postIdNumber)) {
+    throw new Error("Invalid post ID");
+  }
 
   return prisma.comment.findMany({
 
     where: {
-      postId: Number(postId)
+      postId: postIdNumber
     },
 
 
@@ -77,7 +81,7 @@ async function getPostComments(postId) {
 
 
 
-async function deleteComment(id) {
+async function deleteComment(id, userId, userRole) {
 
 
   const comment =
@@ -95,7 +99,9 @@ async function deleteComment(id) {
     throw new Error("Comment not found");
   }
 
-
+  if (userRole !== "ADMIN" && comment.authorId !== userId) {
+    throw new Error("You can only delete your own comments");
+  }
 
   await prisma.comment.delete({
 

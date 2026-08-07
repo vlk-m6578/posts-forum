@@ -11,6 +11,7 @@ import { AuthRoute } from './components/AuthRoute/AuthRoute'
 import { useEffect } from 'react'
 import { useAuthStore } from './store/authStore'
 import { Modal } from './components/Modal/Modal'
+import { CommentsPage } from './pages/CommentsPage/CommentsPage'
 
 export const App = () => {
   const { initializeAuth } = useAuthStore();
@@ -25,6 +26,9 @@ export const App = () => {
         <Route element={<MainLayout />}>
           <Route path={ROUTES.HOME} element={<AboutPage />} />
           <Route path={ROUTES.FEED} element={<FeedPage />} />
+
+          <Route path={ROUTES.COMMENTS} element={<CommentsPage />} />
+
           <Route element={<AuthRoute />}>
             <Route path={ROUTES.MYPOSTS} element={<MyPostsPage />} />
             <Route path={ROUTES.ME} element={<ProfilePage />} />

@@ -60,6 +60,16 @@ export const validateProfileForm = (username: string, country: string, city: str
   };
 }
 
+export const validateCommentForm = (text: string) => {
+  if(!validateCommentText(text)) return 'Please enter a comment';
+
+  return '';
+}
+
+const validateCommentText = (text: string) => {
+  return text.trim().length > 0 && text.trim().length <= 300;
+}
+
 const validateCity = (title: string) => {
   return title.trim().length > 1 && title.trim().length <= 100;
 }

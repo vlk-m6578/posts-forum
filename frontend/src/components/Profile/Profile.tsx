@@ -5,16 +5,19 @@ import profilePhoto from '@/assets/avatar-placeholder.png'
 import { useModalStore } from '@/store/modalStore'
 import { TYPES } from '@/constants/types'
 import { useProfileStore } from '@/store/profileStore'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '@/constants/routes'
 
 export const Profile = () => {
   const { user, logout } = useAuthStore();
   const { openModal } = useModalStore();
   const { toggleIsEditing } = useProfileStore();
 
+  const navigate = useNavigate();
 
   const handleEditButtonClick = () => {
-    // openModal(TYPES.UPDATE_PROFILE);
     toggleIsEditing();
+    navigate(ROUTES.ME);
   }
 
   const handleLogoutButtonClick = () => {
