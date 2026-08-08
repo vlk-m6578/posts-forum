@@ -33,25 +33,34 @@
   gap: 30px;
 
   padding: 20px;
+  padding-bottom: 10px;
   background: #f8f9fa;
   border-radius: 10px;
 }
 
-.comments__list {}
+.comments__list {
+  display: flex;
+  flex-direction: column-reverse;
+}
 
-.comments__loading {}
+.comments__loading {
+  color: #75778B;
+  padding-bottom: 10px;
+}
 
 .comments__empty {
   color: #75778B;
+  padding-bottom: 10px;
 }
 
-.comments__form {}
+.comments__form {
+  margin-top: 10px;
+}
 
 .comments__form form {}
 
 .comments__input_wrapper {
   display: flex;
-  justify-content: center;
 }
 
 .comments__input_wrapper textarea {

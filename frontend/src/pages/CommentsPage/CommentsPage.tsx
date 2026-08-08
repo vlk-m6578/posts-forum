@@ -56,22 +56,25 @@ export const CommentsPage = () => {
           <button onClick={handleBackButtonClick}>← Back</button>
         </div>
 
-        <div className={styles.comments__wrapper}>
-          <div className={styles.comments__list}>
-            {
-              isLoading ? (
-                <div className={styles.comments__loading}>
-                  Loading comments ...
-                </div>
-              ) : comments.length === 0 ? (
-                <div className={styles.comments__empty}>
-                  No comments yet. Be the first!
-                </div>
-              ) : (
-                comments.map(comment => <CommentElement comment={comment} key={comment.id} />)
-              )
-            }
-            {/* <CommentElement comment={}/> */}
+        <div>
+          <div className={styles.comments__wrapper}>
+            <div className={styles.comments__list}>
+              {
+                isLoading ? (
+                  <div className={styles.comments__loading}>
+                    Loading comments ...
+                  </div>
+                ) : comments.length === 0 ? (
+                  <div className={styles.comments__empty}>
+                    No comments yet. Be the first!
+                  </div>
+                ) : (
+                  comments.map(comment => <CommentElement comment={comment} key={comment.id} />)
+                )
+              }
+              {/* <CommentElement comment={}/> */}
+            </div>
+
           </div>
 
           <div className={styles.comments__form}>
@@ -83,6 +86,7 @@ export const CommentsPage = () => {
             </form>
           </div>
         </div>
+
 
       </div>
 

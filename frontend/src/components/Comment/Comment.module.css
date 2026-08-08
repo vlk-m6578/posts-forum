@@ -1,47 +1,54 @@
 .comment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
+  margin-bottom: 10px;
+  background-color: white;
+  padding: 12px;
+  border-radius: 6px;
 }
 
 .comment__header {
-
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.comment__avatar {
-
-}
+.comment__avatar {}
 
 .comment__avatar img {
+  width: 25px;
+  height: 25px;
 
+  border-radius: 6px;
 }
 
 .comment__author {
-
+  display: flex;
+  flex-direction: column;
 }
 
-.comment__username {
-
-}
+.comment__username {}
 
 .comment__location {
-
+  font-size: 10px;
+  color: #888;
+  letter-spacing: 0.5px;
 }
 
-.comment__close_btn {
+.comment__close_btn {}
 
-}
-
-.comment__close_btn button {
-
-}
+.comment__close_btn button {}
 
 .comment__date {
-
+  font-size: 10px;
+  letter-spacing: 0.5px;
 }
 
-.comment__body {
-
-}
+.comment__body {}
 
 .comment__body p {
-  
+  font-weight: 600;
+  margin: 0;
 }

@@ -4,6 +4,7 @@ import profilePhoto from '@/assets/avatar-placeholder.png'
 import { useAuthStore } from '@/store/authStore';
 import { useCommentsStore } from '@/store/commentsStore';
 import { toast } from 'react-toastify';
+import { Button } from '../Button/Button';
 
 interface CommentProps {
   comment: Comment;
@@ -31,10 +32,21 @@ export const CommentElement = ({ comment }: CommentProps) => {
           <span className={styles.comment__username}>{comment.author.username}</span>
           <span className={styles.comment__location}>{comment.author.country}, {comment.author.city}</span>
         </div>
+        <div className={styles.comment__date}>
+          {
+            new Date(comment.createdAt).toLocaleDateString()
+          } {
+            new Date(comment.createdAt).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit'
+            })
+          }
+        </div>
+
         <div className={styles.comment__delete_btn}>
           {
             user?.id === comment.authorId ? (
-              <button onClick={handleDeleteButtonClick} disabled={isSubmitting}>delete</button>
+              <Button variant='delete_black' onButtonClick={handleDeleteButtonClick}></Button>
             ) : (
               null
             )
@@ -43,16 +55,6 @@ export const CommentElement = ({ comment }: CommentProps) => {
         </div>
       </div>
 
-      <div className={styles.comment__date}>
-        {
-          new Date(comment.createdAt).toLocaleDateString()
-        } ' ' {
-          new Date(comment.createdAt).toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit'
-          })
-        }
-      </div>
 
       <div className={styles.comment__body}>
         <p>{comment.text}</p>

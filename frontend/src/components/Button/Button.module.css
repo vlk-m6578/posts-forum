@@ -38,3 +38,7 @@
 .comment {
   background-image: url('../../assets/comment.svg');
 }
+
+.delete_black {
+  background-image: url('../../assets/delete-black.svg');
+}
