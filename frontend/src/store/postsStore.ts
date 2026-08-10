@@ -28,6 +28,9 @@ interface PostsState {
   addPost: () => Promise<void>;
   updatePost: () => Promise<void>;
   deletePost: (id: number) => Promise<void>;
+
+  updateLike: (postId: number, increment: number) => void;
+  toggleLike: (postId: number, isLiked: boolean) => void;
 }
 
 export const usePostsStore = create<PostsState>((set, get) => ({
@@ -203,5 +206,21 @@ export const usePostsStore = create<PostsState>((set, get) => ({
     } finally {
       set({ isLoading: false });
     }
+  },
+
+  updateLike: (postId, increment) => {
+    set(state => ({
+      posts: state.posts.map(post => post.id === postId ? {
+        ...post, _count: {
+          ...post._count,
+          likes: Math.max(0, post._count.likes + increment)
+        }
+      } : post)
+    }))
+  },
+  toggleLike: (postId, isLiked) => {
+    set(state => ({
+      posts: state.posts.map(post => post.id === postId ? { ...post, isLiked } : post)
+    }))
   }
 }))

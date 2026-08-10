@@ -21,5 +21,11 @@ router.delete(
 );
 
 
+router.get(
+  "/status/:postId",
+  auth,
+  controller.getLikeStatus
+);
+
 
 module.exports = router;

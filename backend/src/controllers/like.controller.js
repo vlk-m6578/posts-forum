@@ -61,9 +61,34 @@ async function removeLike(req, res) {
 
 }
 
+async function getLikeStatus(req, res) {
+  try {
+    const userId = req.user.id;
+    const postId = Number(req.params.postId);
+
+    const like = await prisma.like.findUnique({
+      where: {
+        userId_postId: {
+          userId,
+          postId
+        }
+      }
+    });
+
+    res.json({
+      isLiked: !!like
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
+    });
+  }
+}
+
 
 
 module.exports = {
   addLike,
-  removeLike
+  removeLike,
+  getLikeStatus
 };

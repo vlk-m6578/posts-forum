@@ -19,4 +19,6 @@ export interface Post {
     likes: number;
     comments: number;
   };
+
+  isLiked?: boolean;
 }
