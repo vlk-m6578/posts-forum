@@ -24,6 +24,7 @@ router.get(
 
 router.get(
   "/",
+  auth,
   controller.getAll
 );
 

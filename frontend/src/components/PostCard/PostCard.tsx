@@ -8,6 +8,10 @@ import { TYPES } from '@/constants/types';
 import { usePostsStore } from '@/store/postsStore';
 import Skeleton from 'react-loading-skeleton';
 import { useNavigate } from 'react-router-dom';
+import { useLikesStore } from '@/store/likesStore';
+import { toast } from 'react-toastify';
+import { useAuthStore } from '@/store/authStore';
+import { ROUTES } from '@/constants/routes';
 
 interface PostProps {
   post?: Post;
@@ -18,7 +22,9 @@ interface PostProps {
 
 export const PostCard = ({ post, showHeader = false, showFooter = true, isLoading = false }: PostProps) => {
   const { openModal } = useModalStore();
-  const { setPostFormFromPost, setSelectedPostId } = usePostsStore();
+  const { setPostFormFromPost, setSelectedPostId, updateLike, toggleLike } = usePostsStore();
+  const { addLike, removeLike } = useLikesStore();
+  const { user } = useAuthStore();
 
   const navigate = useNavigate();
 
@@ -35,8 +41,30 @@ export const PostCard = ({ post, showHeader = false, showFooter = true, isLoadin
     openModal(TYPES.DELETE_POST);
   }
 
-  const handleLikeButtonClick = () => {
+  const handleLikeButtonClick = async () => {
+    if (!post) return;
+    if (!user) {
+      navigate(ROUTES.LOGIN);
+      return;
+    }
 
+    if (post.isLiked) {
+      updateLike(post.id, -1);
+      toggleLike(post.id, false);
+    } else {
+      updateLike(post.id, 1);
+      toggleLike(post.id, true);
+    }
+
+    try {
+      if (post.isLiked) {
+        await removeLike(post.id);
+      } else {
+        await addLike(post.id);
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   }
 
   const handleCommentButtonClick = () => {
@@ -129,7 +157,7 @@ export const PostCard = ({ post, showHeader = false, showFooter = true, isLoadin
           <div className={styles.post__footer}>
             <div className={styles.post__footer_wrapper}>
               <span className={styles.post__count}>{post._count.likes}</span>
-              <Button variant='unlike' onButtonClick={handleLikeButtonClick}></Button>
+              <Button variant={post.isLiked ? 'like' : 'unlike'} onButtonClick={handleLikeButtonClick}></Button>
             </div>
             <div className={styles.post__footer_wrapper}>
               <span className={styles.post__count}>{post._count.comments}</span>

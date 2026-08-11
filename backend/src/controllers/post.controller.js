@@ -34,7 +34,7 @@ async function getAll(req, res) {
   console.log(req.query);
 
   const posts =
-    await postService.getPosts(req.query);
+    await postService.getPosts(req.query, req.user?.id);
 
 
   res.json(posts);

@@ -1,5 +1,5 @@
 const likeService = require("../services/like.service");
-
+const prisma = require("../config/prisma");
 
 
 async function addLike(req, res) {

@@ -19,62 +19,75 @@ async function createPost(data, files, userId) {
   });
 }
 
-async function getPosts(filters = {}) {
+async function getPosts(filters = {}, userId = null) {
   const where = {};
 
-  if (filters.country) {
-    where.country = filters.country;
-  }
-
-  if (filters.city) {
-    where.city = filters.city;
-  }
-
+  if (filters.country) where.country = filters.country;
+  if (filters.city) where.city = filters.city;
   if (filters.search) {
-    where.title = {
-      contains: filters.search,
-      mode: "insensitive"
-    };
+    where.title = { contains: filters.search, mode: "insensitive" };
   }
 
-  let orderBy = {
-    createdAt: "desc"
-  };
+  let orderBy = { createdAt: "desc" };
+  if (filters.sort === "oldest") orderBy = { createdAt: "asc" };
+  if (filters.sort === "newest") orderBy = { createdAt: "desc" };
 
-  if (filters.sort === "oldest") {
-    orderBy = {
-      createdAt: "asc"
-    };
-  }
-
-  if (filters.sort === "newest") {
-    orderBy = {
-      createdAt: "desc"
-    };
-  }
-
-  return prisma.post.findMany({
+  const posts = await prisma.post.findMany({
     where,
     include: {
-      author: {
-        select: {
-          username: true,
-          city: true
-        }
-      },
-      _count: {
-        select: {
-          likes: true,
-          comments: true
-        }
-      }
+      author: { select: { username: true, city: true } },
+      _count: { select: { likes: true, comments: true } }
     },
     orderBy
   });
+
+  if (userId) {
+    const postIds = posts.map(p => p.id);
+    const likes = await prisma.like.findMany({
+      where: {
+        userId: userId,
+        postId: { in: postIds }
+      },
+      select: { postId: true }
+    });
+    const likedSet = new Set(likes.map(l => l.postId));
+    return posts.map(post => ({
+      ...post,
+      isLiked: likedSet.has(post.id)
+    }));
+  }
+
+  return posts;
 }
 
+async function getMyPosts(userId) {
+  const posts = await prisma.post.findMany({
+    where: { authorId: userId },
+    include: {
+      author: { select: { username: true, city: true } },
+      _count: { select: { likes: true, comments: true } }
+    },
+    orderBy: { createdAt: "desc" }
+  });
+
+  const postIds = posts.map(p => p.id);
+  const likes = await prisma.like.findMany({
+    where: {
+      userId: userId,
+      postId: { in: postIds }
+    },
+    select: { postId: true }
+  });
+  const likedSet = new Set(likes.map(l => l.postId));
+  return posts.map(post => ({
+    ...post,
+    isLiked: likedSet.has(post.id)
+  }));
+}
+
+
 async function getPostById(id) {
-  return prisma.post.findUnique({
+  const post = await prisma.post.findUnique({
     where: {
       id: Number(id)
     },
@@ -103,6 +116,8 @@ async function getPostById(id) {
       }
     }
   });
+
+  return post;
 }
 
 async function updatePost(id, data, files, user) {
@@ -174,31 +189,6 @@ async function deletePost(id, user) {
   return {
     message: "Post deleted"
   };
-}
-
-async function getMyPosts(userId) {
-  return prisma.post.findMany({
-    where: {
-      authorId: userId
-    },
-    include: {
-      author: {
-        select: {
-          username: true,
-          city: true
-        }
-      },
-      _count: {
-        select: {
-          likes: true,
-          comments: true
-        }
-      }
-    },
-    orderBy: {
-      createdAt: "desc"
-    }
-  });
 }
 
 module.exports = {

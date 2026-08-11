@@ -20,7 +20,7 @@ export const useLikesStore = create<LikesState>((set) => ({
     } catch (error: any) {
       toast.error(error.message);
     } finally {
-      set({ isLoading: true });
+      set({ isLoading: false });
     }
   },
   removeLike: async (postId) => {
