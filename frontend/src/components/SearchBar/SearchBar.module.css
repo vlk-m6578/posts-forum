@@ -10,12 +10,12 @@
 .search_bar input {
   height: 37.5px;
   width: 340px;
-  border: 2px solid #F7DAC5;
+  border: 2px solid #2C1E18;
   padding-left: 10px;
 }
 
 .search_bar__btn {
-  background-color: #F7DAC5;
+  background-color: #2C1E18;
   width: 42px;
 }
 

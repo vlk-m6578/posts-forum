@@ -1,83 +1,98 @@
 .post {
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
-  gap: 24px;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: max-content;
+  grid-template-columns: 70px 1fr 10px;
+  grid-template-areas: "avatar post-content modify-block";
 
-  background-color: #F7DAC5;
-  color: #AD7750;
-
-  border-radius: 20px;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 26px;
+  color: #2C1E18;
+  
 }
 
-.post__header {
+.post__avatar {
+  grid-area: avatar;
+
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
-.post__head {
-  display: grid;
-  grid-template-rows: max-content;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "header description";
+.post__avatar img {
+  width: 40px;
+  height: 40px;
 
+  border-radius: 50%;
+}
+
+.post__content {
+  grid-area: post-content;
+}
+
+.post__header {
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
 }
 
-.post__title {
-  grid-area: header;
-  font-weight: 600;
+.post__username {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 26px;
 }
 
-.post__description {
-  grid-area: description;
-  font-weight: 400;
-}
+.post__email {
+  color: #7C7C7C;
 
-.post__info {
-  display: grid;
-  grid-template-rows: max-content;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "author date";
-  font-size: 10px;
-}
-
-.post__author {
-  grid-area: author;
-
-  display: flex;
-  flex-direction: column;
-  text-align: center;
 }
 
 .post__date {
-  grid-area: date;
+  color: #7C7C7C;
+}
 
+
+.post__info {
   display: flex;
   flex-direction: column;
-  text-align: end;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+
+}
+
+.post__main_info {
+  gap: 5px;
+}
+
+.post__title {
+  font-weight: 700;
+}
+
+.post__description {}
+
+.post__location {
+  color: #7C7C7C;
+
 }
 
 .post__footer {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 20px;
 }
 
-.post__footer button {
-  background-color: transparent;
-}
-
-.post__footer_wrapper {
+.post__block {
   display: flex;
   align-items: center;
+
+  font-size: 14px;
+  line-height: 20px;
+  color: white;
+
 }
 
-.post__count {
-  font-size: 12px;
-  font-weight: 700;
+
+
+.post__modify_block {
+  grid-area: modify-block;
 }

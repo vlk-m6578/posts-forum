@@ -38,7 +38,7 @@ async function getPosts(filters = {}, userId = null) {
   const posts = await prisma.post.findMany({
     where,
     include: {
-      author: { select: { username: true, city: true } },
+      author: { select: { username: true, city: true, email: true } },
       _count: { select: { likes: true, comments: true } }
     },
     orderBy
@@ -99,7 +99,8 @@ async function getPostById(id) {
         select: {
           username: true,
           city: true,
-          country: true
+          country: true, 
+          email: true
         }
       },
       comments: {

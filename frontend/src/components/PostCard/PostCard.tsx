@@ -12,15 +12,15 @@ import { useLikesStore } from '@/store/likesStore';
 import { toast } from 'react-toastify';
 import { useAuthStore } from '@/store/authStore';
 import { ROUTES } from '@/constants/routes';
+import photoProfile from '../../assets/avatar-placeholder.png'
 
 interface PostProps {
   post?: Post;
   showHeader?: boolean;
-  showFooter?: boolean;
   isLoading?: boolean;
 }
 
-export const PostCard = ({ post, showHeader = false, showFooter = true, isLoading = false }: PostProps) => {
+export const PostCard = ({ post, showHeader = false, isLoading = false }: PostProps) => {
   const { openModal } = useModalStore();
   const { setPostFormFromPost, setSelectedPostId, updateLike, toggleLike } = usePostsStore();
   const { addLike, removeLike } = useLikesStore();
@@ -74,42 +74,49 @@ export const PostCard = ({ post, showHeader = false, showFooter = true, isLoadin
   if (isLoading) {
     return (
       <div className={styles.post}>
-        <div className={styles.post__header}>
-          {showHeader && (
-            <>
-              <Skeleton circle width={30} height={30} />
-              <Skeleton circle width={30} height={30} />
-            </>
-          )}
+        <div className={styles.post__avatar}>
+          <Skeleton circle width={50} height={50} />
         </div>
 
-        <div className={styles.post__head}>
-          <Skeleton height={28} width="70%" />
-          <Skeleton height={20} width="90%" />
-        </div>
-
-        <div className={styles.skeleton_grid}>
-          <Skeleton height={200} />
-          <Skeleton height={200} />
-          <Skeleton height={200} />
-        </div>
-
-        <div className={styles.post__info}>
-          <div className={styles.post__author}>
-            <Skeleton width={120} />
-            <Skeleton width={100} />
+        <div className={styles.post__content}>
+          <div className={styles.post__header}>
+            <div>
+              <Skeleton width={120} height={20} inline />{' '}
+              <Skeleton width={150} height={16} inline />{' '}
+              <Skeleton width={80} height={16} inline />
+            </div>
           </div>
-          <div className={styles.post__date}>
-            <Skeleton width={80} />
-            <Skeleton width={60} />
-          </div>
-        </div>
 
-        {showFooter && (
+          <div className={styles.post__info}>
+            <div className={styles.post__main_info}>
+              <Skeleton height={24} width="60%" />
+              <br />
+              <Skeleton height={18} width="90%" />
+              <Skeleton height={16} width="40%" />
+            </div>
+            <div className={styles.skeleton_grid}>
+              <Skeleton height={200} />
+              <Skeleton height={200} />
+              <Skeleton height={200} />
+            </div>
+          </div>
+
           <div className={styles.post__footer}>
+            <div className={styles.post__block}>
+              <Skeleton circle width={30} height={30} />
+              <Skeleton width={30} height={20} />
+            </div>
+            <div className={styles.post__block}>
+              <Skeleton circle width={30} height={30} />
+              <Skeleton width={30} height={20} />
+            </div>
+          </div>
+        </div>
+
+        {showHeader && (
+          <div className={styles.post__modify_block}>
             <Skeleton circle width={30} height={30} />
-            <Skeleton width={60} />
-            <Skeleton width={70} />
+            <Skeleton circle width={30} height={30} />
           </div>
         )}
       </div>
@@ -121,48 +128,53 @@ export const PostCard = ({ post, showHeader = false, showFooter = true, isLoadin
 
   return (
     <div className={styles.post}>
+
+      <div className={styles.post__avatar}>
+        <img src={photoProfile}></img>
+      </div>
+
+      <div className={styles.post__content}>
+        <div className={styles.post__header}>
+          <div>
+            <span className={styles.post__username}>{post.author.username} </span>
+            <span className={styles.post__email}>{post.author.email} ◦ </span>
+            <span className={styles.post__date}>{new Date(post.createdAt).toLocaleDateString()}</span>
+          </div>
+          {/* <span>
+            {new Date(post.createdAt).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </span> */}
+        </div>
+
+        <div className={styles.post__info}>
+          <div className={styles.post__main_info}>
+            <span className={styles.post__title}>{post.title}</span><br></br>
+            <span className={styles.post__description}>{post.description}</span>
+            <span className={styles.post__location}> ⌂{post.country} / {post.city}</span>
+          </div>
+          <PhotosGrid photos={post.images} />
+        </div>
+
+        <div className={styles.post__footer}>
+          <div className={styles.post__block}>
+            <Button variant="comment" onButtonClick={handleCommentButtonClick} />
+            <span className={styles.post__count}>{post._count.comments}</span>
+          </div>
+
+          <div className={styles.post__block}>
+            <Button variant={post.isLiked ? 'like' : 'unlike'} onButtonClick={handleLikeButtonClick}></Button>
+            <span className={styles.post__count}>{post._count.likes}</span>
+          </div>
+        </div>
+      </div>
+
       {
         showHeader && (
-          <div className={styles.post__header}>
+          <div className={styles.post__modify_block}>
             <Button variant='edit' onButtonClick={handleUpdateButtonClick}></Button>
             <Button variant='delete' onButtonClick={handleDeleteButtonClick}></Button>
-          </div>
-        )
-      }
-
-      <div className={styles.post__head}>
-        <span className={styles.post__title}>{post.title}</span>
-        <span className={styles.post__description}>{post.description}</span>
-      </div>
-
-      <PhotosGrid photos={post.images} />
-
-      <div className={styles.post__info}>
-        <div className={styles.post__author}>
-          <span>{post.author.username}</span>
-          <span>{post.country}/ {post.city}</span>
-        </div>
-
-        <div className={styles.post__date}>
-          <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-          <span>{new Date(post.createdAt).toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit'
-          })}</span>
-        </div>
-      </div>
-
-      {
-        showFooter && (
-          <div className={styles.post__footer}>
-            <div className={styles.post__footer_wrapper}>
-              <span className={styles.post__count}>{post._count.likes}</span>
-              <Button variant={post.isLiked ? 'like' : 'unlike'} onButtonClick={handleLikeButtonClick}></Button>
-            </div>
-            <div className={styles.post__footer_wrapper}>
-              <span className={styles.post__count}>{post._count.comments}</span>
-              <Button variant="comment" onButtonClick={handleCommentButtonClick} />
-            </div>
           </div>
         )
       }

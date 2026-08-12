@@ -31,7 +31,6 @@ export const FeedPage = () => {
                 key={`skeleton-${index}`}
                 isLoading={true}
                 showHeader={false}
-                showFooter={true}
               />
             ))
           ) : posts.length > 0 ? (
@@ -40,7 +39,6 @@ export const FeedPage = () => {
                 key={post.id}
                 post={post}
                 showHeader={user?.role === 'ADMIN'}
-                showFooter={true}
               />
             ))
           ) : searchQuery ? (

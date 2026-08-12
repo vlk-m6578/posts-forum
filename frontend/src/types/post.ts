@@ -11,6 +11,7 @@ export interface Post {
   author: {
     id: number;
     username: string;
+    email: string;
     city: string;
     country: string;
   };

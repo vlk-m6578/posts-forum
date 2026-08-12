@@ -31,7 +31,6 @@ export const MyPostsPage = () => {
               key={`skeleton-${index}`}
               isLoading={true}
               showHeader={true}
-              showFooter={false}
             />
           ))
         ) : (
@@ -40,7 +39,6 @@ export const MyPostsPage = () => {
               key={post.id}
               post={post}
               showHeader={true}
-              showFooter={false}
             />
           ))
         )}
