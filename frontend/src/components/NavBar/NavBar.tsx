@@ -4,7 +4,7 @@ import { ROUTES } from '@/constants/routes';
 import { useAuthStore } from '@/store/authStore';
 
 export const NavBar = () => {
-  const { token, logout } = useAuthStore();
+  const { token, logout, user } = useAuthStore();
 
   const navigate = useNavigate();
 
@@ -20,8 +20,14 @@ export const NavBar = () => {
       <div className={styles.links}>
         <NavLink to={ROUTES.HOME} className={styles.active}>about</NavLink>/
         <NavLink to={ROUTES.FEED}>feed</NavLink>/
-        <NavLink to={ROUTES.MYPOSTS}>my posts</NavLink>/
-        <NavLink to={ROUTES.ME}>me</NavLink>
+        {
+          user?.role === 'ADMIN' ? (
+            <NavLink to={ROUTES.USERS}>users</NavLink>
+          ) : (
+            <NavLink to={ROUTES.MYPOSTS}>my posts</NavLink>
+          )
+        }
+        /<NavLink to={ROUTES.ME}>me</NavLink>
       </div>
 
       <div className={styles.exit}>

@@ -6,4 +6,5 @@ export const ROUTES = {
   MYPOSTS: '/my-posts',
   ME: '/me',
   COMMENTS: '/posts/:postId/comments',
+  USERS: '/users',
 }

@@ -17,3 +17,11 @@ export const getProfile = () => {
 export const updateProfile = (data: FormData | { username: string; country: string; city: string }) => {
   return api.put(`${baseUrl}/profile`, data);
 }
+
+export const getAllUsers = () => {
+  return api.get(`${baseUrl}/users`);
+}
+
+export const deleteUser = (id: number) => {
+  return api.delete(`${baseUrl}/users/${id}`);
+}

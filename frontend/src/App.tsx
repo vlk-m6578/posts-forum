@@ -12,6 +12,8 @@ import { useEffect } from 'react'
 import { useAuthStore } from './store/authStore'
 import { Modal } from './components/Modal/Modal'
 import { CommentsPage } from './pages/CommentsPage/CommentsPage'
+import { UsersPage } from './pages/UsersPage/UsersPage'
+import { AdminRoute } from './components/AdminRoute/AdminRoute'
 
 export const App = () => {
   const { initializeAuth } = useAuthStore();
@@ -32,6 +34,10 @@ export const App = () => {
           <Route element={<AuthRoute />}>
             <Route path={ROUTES.MYPOSTS} element={<MyPostsPage />} />
             <Route path={ROUTES.ME} element={<ProfilePage />} />
+
+            <Route element={<AdminRoute />}>
+              <Route path={ROUTES.USERS} element={<UsersPage />} />
+            </Route>
           </Route>
         </Route>
         <Route path={ROUTES.LOGIN} element={<AuthPage variant='Login' />} />

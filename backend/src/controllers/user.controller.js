@@ -37,8 +37,28 @@ async function getProfile(req, res) {
   }
 }
 
+async function getAllUsers(req, res) {
+  try {
+    const users = await service.getAllUsers();
+    res.json(users);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+
+async function deleteUser(req, res) {
+  try {
+    const result = await service.deleteUser(req.params.id);
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+
 module.exports = {
   getProfile,
   getMyProfile,
-  updateProfile
+  updateProfile,
+  getAllUsers,
+  deleteUser
 };

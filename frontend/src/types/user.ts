@@ -6,4 +6,10 @@ export interface User {
   country: string;
   city: string;
   posts: [];
+  createdAt: string;
+  _count: {
+    posts: number;
+    likes: number;
+    comments: number;
+  };
 }

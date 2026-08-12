@@ -117,8 +117,60 @@ async function updateProfile(userId, data) {
   });
 }
 
+async function getAllUsers() {
+  return prisma.user.findMany({
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      country: true,
+      city: true,
+      role: true,
+      createdAt: true,
+      _count: {
+        select: {
+          posts: true,
+          likes: true,
+          comments: true
+        }
+      }
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+}
+
+async function deleteUser(id) {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: Number(id)
+    }
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  if (user.role === "ADMIN") {
+    throw new Error("Cannot delete admin user");
+  }
+
+  await prisma.user.delete({
+    where: {
+      id: Number(id)
+    }
+  });
+
+  return {
+    message: "User deleted successfully"
+  };
+}
+
 module.exports = {
   getProfile,
   getMyProfile,
-  updateProfile
+  updateProfile,
+  getAllUsers,
+  deleteUser
 };
