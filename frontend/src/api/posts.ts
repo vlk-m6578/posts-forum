@@ -1,8 +1,8 @@
 import { api } from "./axios";
 
 
-export const getPosts = () => {
-  return api.get('/posts');
+export const getPosts = (params?: { search?: string, country?: string, city?: string, sort?: string }) => {
+  return api.get('/posts', { params });
 }
 
 export const getMyPosts = () => {

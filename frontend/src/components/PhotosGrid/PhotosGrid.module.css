@@ -1,6 +1,8 @@
 .content {
   display: grid;
   gap: 12px;
+
+  height: 350px;
 }
 
 .grid_1 {

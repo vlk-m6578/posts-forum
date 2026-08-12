@@ -7,3 +7,19 @@
 
   padding-bottom: 65px;
 }
+
+.empty_state {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty_state__title {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.empty_state__description {
+  font-weight: 400;
+}

@@ -22,10 +22,13 @@ async function createPost(data, files, userId) {
 async function getPosts(filters = {}, userId = null) {
   const where = {};
 
-  if (filters.country) where.country = filters.country;
-  if (filters.city) where.city = filters.city;
   if (filters.search) {
-    where.title = { contains: filters.search, mode: "insensitive" };
+    where.OR = [
+      { title: { contains: filters.search, mode: "insensitive" } },
+      { author: { username: { contains: filters.search, mode: "insensitive" } } },
+      { country: { contains: filters.search, mode: "insensitive" } },
+      { city: { contains: filters.search, mode: "insensitive" } }
+    ];
   }
 
   let orderBy = { createdAt: "desc" };

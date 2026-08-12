@@ -17,12 +17,20 @@ interface PostsState {
   postForm: PostForm;
   selectedPostId: number | null;
 
+  isSearching: boolean;
+  searchQuery: string;
+
   setPostForm: (data: Partial<PostForm>) => void;
   clearPostForm: () => void;
   setSelectedPostId: (id: number | null) => void;
   setPostFormFromPost: (post: Post) => void;
 
-  getPosts: () => Promise<void>;
+  getPosts: (params?: {
+    search?: string;
+    country?: string;
+    city?: string;
+    sort?: string;
+  }) => Promise<void>;
   getMyPosts: () => Promise<void>;
 
   addPost: () => Promise<void>;
@@ -31,12 +39,17 @@ interface PostsState {
 
   updateLike: (postId: number, increment: number) => void;
   toggleLike: (postId: number, isLiked: boolean) => void;
+
+  setSearchQuery: (query: string) => void;
 }
 
 export const usePostsStore = create<PostsState>((set, get) => ({
   posts: [],
   isLoading: false,
   selectedPostId: null,
+
+  isSearching: false,
+  searchQuery: '',
 
   postForm: {
     title: '',
@@ -103,16 +116,16 @@ export const usePostsStore = create<PostsState>((set, get) => ({
     });
   },
 
-  getPosts: async () => {
+  getPosts: async (params) => {
     try {
-      set({ isLoading: true });
-      const res = await getPosts();
+      set({ isLoading: true, isSearching: Boolean(params?.search) });
+      const res = await getPosts(params);
 
       set({
         posts: res.data,
       })
     } finally {
-      set({ isLoading: false })
+      set({ isLoading: false, isSearching: false })
     }
   },
 
@@ -222,5 +235,9 @@ export const usePostsStore = create<PostsState>((set, get) => ({
     set(state => ({
       posts: state.posts.map(post => post.id === postId ? { ...post, isLiked } : post)
     }))
+  },
+
+  setSearchQuery: (query) => {
+    set({ searchQuery: query });
   }
 }))

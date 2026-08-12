@@ -42,3 +42,7 @@
 .delete_black {
   background-image: url('../../assets/delete-black.svg');
 }
+
+.search {
+  background-image: url('../../assets/search.svg');
+}
