@@ -1,0 +1,50 @@
+.users_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  margin-bottom: 40px;
+}
+
+.users_page__table {
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+}
+
+.empty {
+  color: #95a5a6;
+  font-size: 11px;
+}
+
+.users_page__row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 13px;
+  color: #7f8c8d;
+}
+
+.username {
+  color: #2C1E18;
+}
+
+.email {}
+
+.location {}
+
+.role {}
+
+.date {
+  font-size: 12px;
+}
+
+.delete_btn {
+  padding: 4px 14px;
+  color: #2C1E18;
+  border-radius: 6px;
+  font-size: 12px;
+}

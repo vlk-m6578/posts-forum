@@ -1,4 +1,4 @@
-import { getAllUsers } from "@/api/users";
+import { deleteUser, getAllUsers } from "@/api/users";
 import type { User } from "@/types/user";
 import { toast } from "react-toastify";
 import { create } from "zustand";
@@ -31,6 +31,7 @@ export const useUsersStore = create<UsersState>(set => ({
   deleteUser: async (id) => {
     try {
       set({ isLoading: true });
+      await deleteUser(id);
       set(state => ({
         users: state.users.filter(user => user.id !== id)
       }))

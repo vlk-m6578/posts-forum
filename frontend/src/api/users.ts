@@ -19,9 +19,9 @@ export const updateProfile = (data: FormData | { username: string; country: stri
 }
 
 export const getAllUsers = () => {
-  return api.get(`${baseUrl}/users`);
+  return api.get(`${baseUrl}`);
 }
 
 export const deleteUser = (id: number) => {
-  return api.delete(`${baseUrl}/users/${id}`);
+  return api.delete(`${baseUrl}/${id}`);
 }

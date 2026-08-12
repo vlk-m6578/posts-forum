@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react'
 
 import { usePostsStore } from '@/store/postsStore'
 import { SearchBar } from '@/components/SearchBar/SearchBar'
+import { useAuthStore } from '@/store/authStore'
 
 export const FeedPage = () => {
   const { posts, getPosts, isLoading, searchQuery, setSearchQuery } = usePostsStore();
+  const { user } = useAuthStore();
 
   useEffect(() => {
     getPosts();
@@ -37,7 +39,7 @@ export const FeedPage = () => {
               <PostCard
                 key={post.id}
                 post={post}
-                showHeader={false}
+                showHeader={user?.role === 'ADMIN'}
                 showFooter={true}
               />
             ))

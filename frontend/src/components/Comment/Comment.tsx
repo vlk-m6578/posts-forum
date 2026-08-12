@@ -45,7 +45,7 @@ export const CommentElement = ({ comment }: CommentProps) => {
 
         <div className={styles.comment__delete_btn}>
           {
-            user?.id === comment.authorId ? (
+            (user?.id === comment.authorId || user?.role === 'ADMIN') ? (
               <Button variant='delete_black' onButtonClick={handleDeleteButtonClick}></Button>
             ) : (
               null
