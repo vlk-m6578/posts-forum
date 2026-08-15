@@ -12,6 +12,12 @@
 .comment__header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.comment__wrapper {
+  display: flex;
+  align-items: center;
   gap: 5px;
 }
 

@@ -3,6 +3,8 @@
   gap: 12px;
 
   height: 350px;
+  width: inherit;
+  height: inherit;
 }
 
 .grid_1 {
@@ -16,7 +18,7 @@
   display: grid;
   grid-template-rows: repeat(1fr, 2);
   grid-template-columns: repeat(1fr, 2);
-  grid-template-areas: "img1 img2" "img1 img2";
+  grid-template-areas: "img1 img1" "img2 img2";
 }
 
 .grid_3 {
