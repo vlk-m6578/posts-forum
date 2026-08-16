@@ -28,7 +28,7 @@ interface ProfileState {
   toggleIsEditing: () => void;
 }
 
-export const useProfileStore = create<ProfileState>((set, get) => ({
+export const useProfileStore = create<ProfileState>((set) => ({
   profile: null,
   isLoading: false,
   isUpdating: false,

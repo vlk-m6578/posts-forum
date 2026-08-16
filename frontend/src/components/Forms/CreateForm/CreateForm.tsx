@@ -20,7 +20,7 @@ interface CreateFormProps {
 }
 
 export const CreateForm = ({ type }: CreateFormProps) => {
-  const { postForm, setPostForm, clearPostForm, selectedPostId, setSelectedPostId, addPost, updatePost } = usePostsStore();
+  const { postForm, setPostForm, clearPostForm, setSelectedPostId, addPost, updatePost } = usePostsStore();
   const { closeModal } = useModalStore();
 
   const [errors, setErrors] = useState<Errors>({

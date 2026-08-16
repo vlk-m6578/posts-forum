@@ -1,6 +1,6 @@
 import { PostCard } from '@/components/PostCard/PostCard'
 import styles from './FeedPage.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { usePostsStore } from '@/store/postsStore'
 import { SearchBar } from '@/components/SearchBar/SearchBar'

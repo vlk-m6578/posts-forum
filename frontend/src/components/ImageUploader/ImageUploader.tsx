@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useRef } from 'react'
 import styles from './ImageUploader.module.css'
 import { usePostsStore } from '@/store/postsStore';
 import type { Photo } from '@/types/photo';

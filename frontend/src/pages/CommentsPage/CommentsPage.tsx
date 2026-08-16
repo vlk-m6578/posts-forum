@@ -2,7 +2,6 @@ import { CommentElement } from '@/components/Comment/Comment'
 import styles from './CommentsPage.module.css'
 import { useCommentsStore } from '@/store/commentsStore'
 import { useEffect, useState } from 'react';
-import { usePostsStore } from '@/store/postsStore';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { validateCommentForm } from '@/services/validationService';
@@ -11,15 +10,12 @@ import { ROUTES } from '@/constants/routes';
 
 export const CommentsPage = () => {
   const { comments, isLoading, isSubmitting, getComments, createComment } = useCommentsStore();
-  const { posts } = usePostsStore();
   const { user } = useAuthStore();
-
 
   const [text, setText] = useState('');
   const navigate = useNavigate();
 
   const param = useParams().postId;
-  const post = posts.find(p => p.id === Number(param));
 
   useEffect(() => {
     getComments(Number(param));
@@ -29,7 +25,7 @@ export const CommentsPage = () => {
     navigate(-1);
   }
 
-  const handleFormSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async () => {
     const message = validateCommentForm(text);
     if (message) {
       toast.error(message);

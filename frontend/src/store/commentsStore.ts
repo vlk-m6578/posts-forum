@@ -15,7 +15,7 @@ interface CommentsState {
   clearComments: () => void;
 }
 
-export const useCommentsStore = create<CommentsState>((set, get) => ({
+export const useCommentsStore = create<CommentsState>((set) => ({
   comments: [],
   isLoading: false,
   isSubmitting: false,

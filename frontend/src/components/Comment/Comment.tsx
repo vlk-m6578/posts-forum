@@ -12,7 +12,7 @@ interface CommentProps {
 
 export const CommentElement = ({ comment }: CommentProps) => {
   const { user } = useAuthStore();
-  const { isSubmitting, deleteComment } = useCommentsStore();
+  const { deleteComment } = useCommentsStore();
 
   const handleDeleteButtonClick = async () => {
     try {
