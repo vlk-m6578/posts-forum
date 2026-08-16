@@ -1,27 +1,25 @@
 import { api } from "./axios";
 
-const baseUrl = 'http://localhost:5000/api/users';
-
 export const getMyProfile = () => {
-  return api.get(`${baseUrl}/me`);
+  return api.get(`/users/me`);
 }
 
 export const getUserById = (id: number) => {
-  return api.get(`${baseUrl}/${id}`)
+  return api.get(`/users/${id}`)
 }
 
 export const getProfile = () => {
-  return api.get(`${baseUrl}/profile`);
+  return api.get(`/users/profile`);
 }
 
 export const updateProfile = (data: FormData | { username: string; country: string; city: string }) => {
-  return api.put(`${baseUrl}/profile`, data);
+  return api.put(`/users/profile`, data);
 }
 
 export const getAllUsers = () => {
-  return api.get(`${baseUrl}`);
+  return api.get(`/users`);
 }
 
 export const deleteUser = (id: number) => {
-  return api.delete(`${baseUrl}/${id}`);
+  return api.delete(`/users/${id}`);
 }
