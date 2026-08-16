@@ -1,4 +1,4 @@
-import type { CommentData } from "@/types/comment";
+import type { CommentData } from "../types/comment";
 import { api } from "./axios";
 
 export const getComments = (postId: number) => {

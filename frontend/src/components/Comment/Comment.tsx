@@ -1,8 +1,8 @@
-import type { Comment } from '@/types/comment'
+import type { Comment } from '../../types/comment'
 import styles from './Comment.module.css'
-import profilePhoto from '@/assets/avatar-placeholder.png'
-import { useAuthStore } from '@/store/authStore';
-import { useCommentsStore } from '@/store/commentsStore';
+import profilePhoto from '../../assets/avatar-placeholder.png'
+import { useAuthStore } from '../../store/authStore';
+import { useCommentsStore } from '../../store/commentsStore';
 import { toast } from 'react-toastify';
 import { Button } from '../Button/Button';
 

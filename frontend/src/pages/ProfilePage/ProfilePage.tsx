@@ -1,10 +1,10 @@
-import { useProfileStore } from "@/store/profileStore"
+import { useProfileStore } from "../../store/profileStore"
 import { useEffect, useState } from "react";
-import profilePhoto from '@/assets/avatar-placeholder.png'
+import profilePhoto from '../../assets/avatar-placeholder.png'
 
 import styles from './ProfilePage.module.css'
 import { toast } from "react-toastify";
-import { validateProfileForm } from "@/services/validationService";
+import { validateProfileForm } from "../../services/validationService";
 
 interface Errors {
   username: string | undefined,

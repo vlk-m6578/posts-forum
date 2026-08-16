@@ -1,6 +1,6 @@
-import { addPost, getMyPosts, getPosts, updatePost, deletePost } from "@/api/posts";
-import type { Photo } from "@/types/photo";
-import type { Post } from "@/types/post";
+import { addPost, getMyPosts, getPosts, updatePost, deletePost } from "../api/posts";
+import type { Photo } from "../types/photo";
+import type { Post } from "../types/post";
 import { create } from "zustand";
 
 interface PostForm {

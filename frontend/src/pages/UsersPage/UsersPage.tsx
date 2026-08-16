@@ -1,4 +1,4 @@
-import { useUsersStore } from "@/store/usersStore"
+import { useUsersStore } from "../../store/usersStore"
 import styles from './UsersPage.module.css'
 import { useEffect } from "react";
 

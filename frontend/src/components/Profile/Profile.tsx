@@ -1,12 +1,12 @@
-import { useAuthStore } from '@/store/authStore'
+import { useAuthStore } from '../../store/authStore'
 import { Button } from '../Button/Button'
 import styles from './Profile.module.css'
-import profilePhoto from '@/assets/avatar-placeholder.png'
-import { useModalStore } from '@/store/modalStore'
-import { TYPES } from '@/constants/types'
-import { useProfileStore } from '@/store/profileStore'
+import profilePhoto from '../../assets/avatar-placeholder.png'
+import { useModalStore } from '../../store/modalStore'
+import { TYPES } from '../../constants/types'
+import { useProfileStore } from '../../store/profileStore'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '@/constants/routes'
+import { ROUTES } from '../../constants/routes'
 
 export const Profile = () => {
   const { user, logout } = useAuthStore();

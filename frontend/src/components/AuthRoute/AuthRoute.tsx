@@ -1,5 +1,5 @@
-import { ROUTES } from "@/constants/routes";
-import { useAuthStore } from "@/store/authStore"
+import { ROUTES } from "../../constants/routes";
+import { useAuthStore } from "../../store/authStore"
 import { Navigate, Outlet } from "react-router-dom";
 
 

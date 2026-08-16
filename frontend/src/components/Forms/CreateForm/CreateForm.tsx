@@ -1,11 +1,11 @@
-import { usePostsStore } from '@/store/postsStore'
+import { usePostsStore } from '../../../store/postsStore'
 import styles from './CreateForm.module.css'
-import { ImageUploader } from '@/components/ImageUploader/ImageUploader'
-import { useModalStore } from '@/store/modalStore';
-import { validateCreatePostForm } from '@/services/validationService';
+import { ImageUploader } from '../../../components/ImageUploader/ImageUploader'
+import { useModalStore } from '../../../store/modalStore';
+import { validateCreatePostForm } from '../../../services/validationService';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { TYPES } from '@/constants/types';
+import { TYPES } from '../../../constants/types';
 
 interface Errors {
   title: string | undefined,

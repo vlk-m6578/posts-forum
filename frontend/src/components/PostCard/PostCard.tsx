@@ -1,17 +1,17 @@
 import styles from './PostCard.module.css'
 
 import { PhotosGrid } from '../PhotosGrid/PhotosGrid'
-import type { Post } from '@/types/post'
+import type { Post } from '../../types/post'
 import { Button } from '../Button/Button'
-import { useModalStore } from '@/store/modalStore';
-import { TYPES } from '@/constants/types';
-import { usePostsStore } from '@/store/postsStore';
+import { useModalStore } from '../../store/modalStore';
+import { TYPES } from '../../constants/types';
+import { usePostsStore } from '../../store/postsStore';
 import Skeleton from 'react-loading-skeleton';
 import { useNavigate } from 'react-router-dom';
-import { useLikesStore } from '@/store/likesStore';
+import { useLikesStore } from '../../store/likesStore';
 import { toast } from 'react-toastify';
-import { useAuthStore } from '@/store/authStore';
-import { ROUTES } from '@/constants/routes';
+import { useAuthStore } from '../../store/authStore';
+import { ROUTES } from '../../constants/routes';
 import photoProfile from '../../assets/avatar-placeholder.png'
 
 interface PostProps {

@@ -1,5 +1,5 @@
-import { deleteUser, getAllUsers } from "@/api/users";
-import type { User } from "@/types/user";
+import { deleteUser, getAllUsers } from "../api/users";
+import type { User } from "../types/user";
 import { toast } from "react-toastify";
 import { create } from "zustand";
 

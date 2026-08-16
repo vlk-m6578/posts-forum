@@ -1,10 +1,10 @@
-import { PostCard } from '@/components/PostCard/PostCard'
+import { PostCard } from '../../components/PostCard/PostCard'
 import styles from './FeedPage.module.css'
 import { useEffect } from 'react'
 
-import { usePostsStore } from '@/store/postsStore'
-import { SearchBar } from '@/components/SearchBar/SearchBar'
-import { useAuthStore } from '@/store/authStore'
+import { usePostsStore } from '../../store/postsStore'
+import { SearchBar } from '../../components/SearchBar/SearchBar'
+import { useAuthStore } from '../../store/authStore'
 
 export const FeedPage = () => {
   const { posts, getPosts, isLoading, searchQuery, setSearchQuery } = usePostsStore();

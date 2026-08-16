@@ -1,4 +1,4 @@
-import { addLike, removeLike } from "@/api/likes";
+import { addLike, removeLike } from "../api/likes";
 import { toast } from "react-toastify";
 import { create } from "zustand";
 

@@ -1,14 +1,14 @@
-import { AuthInput } from '@/components/AuthInput/AuthInput';
+import { AuthInput } from '../../components/AuthInput/AuthInput';
 import styles from './AuthPage.module.css'
-import { UserIcon } from '@/components/Icons/UserIcon';
-import { LockIcon } from '@/components/Icons/LockIcon';
+import { UserIcon } from '../../components/Icons/UserIcon';
+import { LockIcon } from '../../components/Icons/LockIcon';
 import type React from 'react';
 import { useState } from 'react';
-import { useAuthStore } from '@/store/authStore';
-import { ROUTES } from '@/constants/routes';
+import { useAuthStore } from '../../store/authStore';
+import { ROUTES } from '../../constants/routes';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LocationIcon } from '@/components/Icons/LocationIcon';
-import { validateLoginForm, validateRegisterForm } from '@/services/validationService';
+import { LocationIcon } from '../../components/Icons/LocationIcon';
+import { validateLoginForm, validateRegisterForm } from '../../services/validationService';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 

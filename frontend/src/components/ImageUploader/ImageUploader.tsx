@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import styles from './ImageUploader.module.css'
-import { usePostsStore } from '@/store/postsStore';
-import type { Photo } from '@/types/photo';
+import { usePostsStore } from '../../store/postsStore';
+import type { Photo } from '../../types/photo';
 
 export const ImageUploader = () => {
   const inputRef = useRef<HTMLInputElement>(null);

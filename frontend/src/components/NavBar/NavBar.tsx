@@ -1,7 +1,7 @@
 import styles from './NavBar.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { ROUTES } from '@/constants/routes';
-import { useAuthStore } from '@/store/authStore';
+import { ROUTES } from '../../constants/routes';
+import { useAuthStore } from '../../store/authStore';
 
 export const NavBar = () => {
   const { token, logout, user } = useAuthStore();

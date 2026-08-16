@@ -1,12 +1,12 @@
-import { CommentElement } from '@/components/Comment/Comment'
+import { CommentElement } from '../../components/Comment/Comment'
 import styles from './CommentsPage.module.css'
-import { useCommentsStore } from '@/store/commentsStore'
+import { useCommentsStore } from '../../store/commentsStore'
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { validateCommentForm } from '@/services/validationService';
-import { useAuthStore } from '@/store/authStore';
-import { ROUTES } from '@/constants/routes';
+import { validateCommentForm } from '../../services/validationService';
+import { useAuthStore } from '../../store/authStore';
+import { ROUTES } from '../../constants/routes';
 
 export const CommentsPage = () => {
   const { comments, isLoading, isSubmitting, getComments, createComment } = useCommentsStore();

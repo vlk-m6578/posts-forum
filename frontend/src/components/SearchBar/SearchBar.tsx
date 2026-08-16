@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../Button/Button';
 import styles from './SearchBar.module.css'
-import { useDebounce } from '@/hooks/useDebounce';
+import { useDebounce } from '../../hooks/useDebounce';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;

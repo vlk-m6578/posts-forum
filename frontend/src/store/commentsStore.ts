@@ -1,5 +1,5 @@
-import { createComment, deleteComment, getComments } from "@/api/comments";
-import type { Comment, CommentData } from "@/types/comment";
+import { createComment, deleteComment, getComments } from "../api/comments";
+import type { Comment, CommentData } from "../types/comment";
 import { toast } from "react-toastify";
 import { create } from "zustand";
 

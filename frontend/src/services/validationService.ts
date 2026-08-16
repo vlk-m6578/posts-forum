@@ -1,4 +1,4 @@
-import type { Photo } from "@/types/photo";
+import type { Photo } from "../types/photo";
 
 export const validateLoginForm = (email: string, password: string) => {
   if (!validateRequired(email)) return 'Email is required';

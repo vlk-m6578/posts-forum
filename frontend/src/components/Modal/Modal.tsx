@@ -1,7 +1,7 @@
-import { useModalStore } from '@/store/modalStore'
+import { useModalStore } from '../../store/modalStore'
 import styles from './Modal.module.css'
 import { CreateForm } from '../Forms/CreateForm/CreateForm';
-import { TYPES } from '@/constants/types';
+import { TYPES } from '../../constants/types';
 import { ConfirmForm } from '../Forms/ConfirmForm/ConfirmForm';
 
 export const Modal = () => {

@@ -1,4 +1,4 @@
-import { getMyProfile, updateProfile } from "@/api/users";
+import { getMyProfile, updateProfile } from "../api/users";
 import { create } from "zustand";
 
 interface UserProfile {

@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import styles from './MyPostsPage.module.css'
-import { usePostsStore } from '@/store/postsStore';
-import { PostCard } from '@/components/PostCard/PostCard';
-import { Button } from '@/components/Button/Button';
-import { useModalStore } from '@/store/modalStore';
-import { TYPES } from '@/constants/types';
+import { usePostsStore } from '../../store/postsStore';
+import { PostCard } from '../../components/PostCard/PostCard';
+import { Button } from '../../components/Button/Button';
+import { useModalStore } from '../../store/modalStore';
+import { TYPES } from '../../constants/types';
 
 export const MyPostsPage = () => {
   const { posts, getMyPosts, isLoading } = usePostsStore();

@@ -1,6 +1,6 @@
-import { useModalStore } from '@/store/modalStore'
+import { useModalStore } from '../../../store/modalStore'
 import styles from './ConfirmForm.module.css'
-import { usePostsStore } from '@/store/postsStore';
+import { usePostsStore } from '../../../store/postsStore';
 import { toast } from 'react-toastify';
 
 export const ConfirmForm = () => {
