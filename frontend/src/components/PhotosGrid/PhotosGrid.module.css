@@ -15,8 +15,8 @@
 
 .grid_2 {
   display: grid;
-  grid-template-rows: repeat(1fr, 2);
-  grid-template-columns: repeat(1fr, 2);
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-areas: "img1 img1" "img2 img2";
 
   height: inherit;
@@ -24,15 +24,15 @@
 
 .grid_3 {
   display: grid;
-  grid-template-rows: repeat(1fr, 2);
-  grid-template-columns: repeat(1fr, 2);
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-areas: "img1 img2" "img3 img2";
 }
 
 .grid_4 {
   display: grid;
-  grid-template-rows: repeat(1fr, 2);
-  grid-template-columns: repeat(1fr, 2);
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-areas: "img1 img2" "img3 img4";
 }
 
