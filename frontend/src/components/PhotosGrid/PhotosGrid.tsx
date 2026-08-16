@@ -11,7 +11,7 @@ export const PhotosGrid = ({ photos }: PhotosGridProps) => {
     <div className={`${styles.content} ${gridClass}`}>
       {photos.map((photo, index) => {
         return <div key={index} className={styles.image}>
-          <img src={`${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}${photo}`}></img>
+          <img src={`${import.meta.env.VITE_API_URL.replace('/api', '')}${photo}`}></img>
         </div>
       })}
     </div>
