@@ -65,7 +65,7 @@ async function getByPost(req, res) {
 
 
 async function remove(req, res) {
-
+  
   try {
 
 
